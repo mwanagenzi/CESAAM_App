@@ -1,3 +1,4 @@
+import 'widgets/widgets.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -10,33 +11,50 @@ class CESAAMApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'CESAAM App',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.blue,//TODO: Define the CESAAM Theme colors
       ),
-      home: const HomeScreen(title: 'CESAAM App'),
+      home: const WelcomeScreen(),
     );
   }
 }
 
-class HomeScreen extends StatelessWidget {
-  const HomeScreen({Key? key, required String title}) : super(key: key);
+class WelcomeScreen extends StatelessWidget {
+  const WelcomeScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        decoration: BoxDecoration(
-          color: Colors.blue[800],
-        ),
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              
-            ],
-          ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            const Spacer(),
+            CircleAvatar(
+              radius: 125,
+              backgroundColor: Colors.white,
+              child: Image.asset('assets/png_images/welcome_feedback_png.png'),
+            ),
+            const Spacer(),
+            const Text(
+              'CESAAM Customer Review',
+              style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+            ),
+            const SizedBox(height: 10),
+            const Text(
+              'For Quality Assurance, we would\n appreciate your feedback',
+              textAlign: TextAlign.center,
+              style: TextStyle(fontSize: 18),
+            ),
+            const Spacer(),
+            CESAAMButton(
+              buttonText: 'Continue',
+              buttonFunction: () {}, //TODO: navigate to onboarding screen
+            ),
+            const Spacer(),
+          ],
         ),
       ),
     );
