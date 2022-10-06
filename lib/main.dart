@@ -19,52 +19,26 @@ class CESAAMApp extends StatelessWidget {
   }
 }
 
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({Key? key, required this.title}) : super(key: key);
-  final String title;
-
-  @override
-  State<HomeScreen> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<HomeScreen> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
+class HomeScreen extends StatelessWidget {
+  const HomeScreen({Key? key, required String title}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    
     return Scaffold(
-      appBar: AppBar(
-        
-        title: Text(widget.title),
-      ),
-      body: Center(
-        
-        child: Column(
-          
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
-            ),
-          ],
+      body: Container(
+        decoration: BoxDecoration(
+          color: Colors.blue[800],
+        ),
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              
+            ],
+          ),
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), 
     );
   }
 }
