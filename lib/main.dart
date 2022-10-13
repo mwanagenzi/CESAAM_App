@@ -1,7 +1,6 @@
-import 'package:ceesam_app/screens/welcome_screen.dart';
-
-import 'widgets/widgets.dart';
 import 'package:flutter/material.dart';
+
+import 'screens/screens.dart';
 
 void main() {
   runApp(const CESAAMApp());
@@ -14,10 +13,12 @@ class CESAAMApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(
-        primarySwatch: Colors.blue, //TODO: Define the CESAAM Theme colors
+        primarySwatch: Colors.green, //TODO: Define the CESAAM Theme colors
       ),
+      home: const HomeScreen(),
       routes: {
-        '/': (context) => const WelcomeScreen(),
+        // '/': (context) => const WelcomeScreen(),
+        // '/home': (context) => const HomeScreen(),
       },
     );
   }
