@@ -19,6 +19,11 @@ class CESAAMApp extends StatelessWidget {
       routes: {
         // '/': (context) => const WelcomeScreen(),
         // '/home': (context) => const HomeScreen(),
+        '/home/suggestion':(context) => SuggestionScreen(),
+        '/home/compliment':(context) => ComplimentScreen(),
+        '/home/complaint':(context) => ComplaintScreen(),
+        '/home/personal_details':(context) => PersonalDetailsScreen(),
+        'home/submission_status':(context) => SubmissionStatusScreen(),
       },
     );
   }
