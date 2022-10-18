@@ -50,10 +50,11 @@ class _SuggestionScreenState extends State<SuggestionScreen> {
               const SizedBox(height: 20),
               Form(
                 key: _suggestionFormFieldKey,
-                child: FeedbackFormField(
-                  suggestionTextController: _suggestionTextController,
-                  formFieldText: 'Brief Description',
-                  formIcon: Icons.edit_outlined,
+                  child: CESAAMTextFormField(
+                    textController: _suggestionTextController,
+                    formFieldText: 'Brief Description',
+                    formIcon: Icons.edit_outlined,
+                    numberOfLines: 10,
                 ),
               ),
               const SizedBox(height: 20),

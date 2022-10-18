@@ -1,6 +1,8 @@
 import 'package:ceesam_app/widgets/home_screen_tile.dart';
 import 'package:flutter/material.dart';
 
+enum Menu { aboutUs, contactUs, developer }
+
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
 
@@ -16,6 +18,27 @@ class HomeScreen extends StatelessWidget {
             fontSize: 22,
           ),
         ),
+        actions: [
+          PopupMenuButton<Menu>(
+            onSelected: (Menu value) {
+              //TODO:set how to navigate to each of the 3 screens here
+            },
+            itemBuilder: (context) => <PopupMenuEntry<Menu>>[
+              const PopupMenuItem<Menu>(
+                value: Menu.aboutUs,
+                child: Text('About Us'),
+              ),
+              const PopupMenuItem<Menu>(
+                value: Menu.contactUs,
+                child: Text('Contact Us'),
+              ),
+              const PopupMenuItem<Menu>(
+                value: Menu.developer,
+                child: Text('Developer'),
+              )
+            ],
+          )
+        ],
         centerTitle: true, //TODO: define in app theme
       ),
       body: Padding(
@@ -32,9 +55,13 @@ class HomeScreen extends StatelessWidget {
                 children: const [
                   HomeScreenTile(
                     svgAssetFilePath: "assets/svg_images/idea-suggestion.svg",
+                    tileTitle: "Suggestion",
+                    tileDescription: "Tell us how we can serve you better",
                   ), //TODO: Define screen tile title, description and image
                   HomeScreenTile(
                     svgAssetFilePath: "assets/svg_images/noun-thumbs-up.svg",
+                    tileTitle: "Compliment",
+                    tileDescription: "Positive remarks keep us going",
                   ),
                 ],
               ),
@@ -43,8 +70,10 @@ class HomeScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: const [
                   HomeScreenTile(
-                    svgAssetFilePath: "assets/svg_images/dissatisfied.svg",
-                  ),
+                      svgAssetFilePath: "assets/svg_images/dissatisfied.svg",
+                      tileTitle: "Complaint",
+                      tileDescription:
+                          "Identify any flaws that we can rectify"),
                 ],
               ),
             ],

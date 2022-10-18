@@ -51,9 +51,9 @@ class _ComplaintScreenState extends State<ComplaintScreen> {
               const SizedBox(height: 20),
               Form(
                 key: _complaintFormFieldKey,
-                child: FeedbackFormField(
-                  suggestionTextController: _complaintTextController,
-                  formFieldText: 'Brief Description of your complaint',
+                child: CESAAMTextFormField(
+                  textController: _complaintTextController,
+                  formFieldText: "Brief Description",
                   formIcon: Icons.edit_outlined,
                 ),
               ),

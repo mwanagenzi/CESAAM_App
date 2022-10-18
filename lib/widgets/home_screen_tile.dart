@@ -1,13 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
+const TextStyle _tileTitleStyle =
+    TextStyle(fontWeight: FontWeight.bold, fontSize: 20);
+//TODO: define screen title text in theme settings
+const TextStyle _tileDescriptionStyle = TextStyle(fontSize: 16);
+//TODO: define screen title description in app theme
+
 class HomeScreenTile extends StatelessWidget {
   final String _svgAssetFilePath;
+  final String _tileTitle;
+  final String _tileDescription;
   const HomeScreenTile({
     Key? key,
-    required String svgAssetFilePath, 
+    required String svgAssetFilePath,
+    required String tileTitle,
+    required String tileDescription,
   })  : _svgAssetFilePath = svgAssetFilePath,
-  super(key: key);
+        _tileTitle = tileTitle,
+        _tileDescription = tileDescription,
+        super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -35,24 +47,19 @@ class HomeScreenTile extends StatelessWidget {
               height: 75,
               width: 75,
             ),
-            const Text(
-              'Screen Title',
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 20, //TODO: define screen title text in theme settings
-              ),
+            Text(
+              _tileTitle,
+              style: _tileTitleStyle,
             ),
             const Divider(
-              color: Color(0xffCA0506), //TODO: App Theme Secondary coloR
+              color: Color(0xFFE27926), //TODO: App Theme Secondary color
               thickness: 2,
             ),
-            const Text(
-              "Screen Description Goes Here \n Lot's of text here",
+            Text(
+              _tileDescription,
               textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize:
-                    16, //TODO: define screen title description in app theme
-              ),
+              style: _tileDescriptionStyle,
+              softWrap: true,
             ),
           ],
         ),

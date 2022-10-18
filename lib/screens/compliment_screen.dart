@@ -51,11 +51,18 @@ class _ComplimentScreenState extends State<ComplimentScreen> {
               const SizedBox(height: 20),
               Form(
                 key: _complimentFormFieldKey,
-                child: FeedbackFormField(
-                  suggestionTextController: _complimentTextController,
-                  formFieldText: 'Brief Description of your compliment',
-                  formIcon: Icons.edit_outlined,
-                ),
+                  child: CESAAMTextFormField(
+                    textController: _complimentTextController,
+                    formFieldText: 'Brief Description',
+                    formIcon: Icons.edit_outlined,
+                    numberOfLines: 7,
+                  )
+                
+                // FeedbackFormField(
+                //   suggestionTextController: _complimentTextController,
+                //   formFieldText: 'Brief Description of your compliment',
+                //   formIcon: Icons.edit_outlined,
+                // ),
               ),
               const SizedBox(height: 20),
               CESAAMButton(

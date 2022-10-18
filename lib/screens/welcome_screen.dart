@@ -42,3 +42,4 @@ class WelcomeScreen extends StatelessWidget {
     );
   }
 }
+//TODO; set a timer to show this screen on app start to replace the "Continue" button
