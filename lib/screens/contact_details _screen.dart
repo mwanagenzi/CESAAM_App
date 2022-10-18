@@ -36,7 +36,7 @@ class _ContactDetailsScreenState extends State<ContactDetailsScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          'Contact Details',
+          'Contact Address',
           style: TextStyle(
             fontSize: 22,
             fontWeight: FontWeight.bold,
@@ -52,6 +52,13 @@ class _ContactDetailsScreenState extends State<ContactDetailsScreen> {
               height: 200,
               width: 200,
             ),
+            const Text(
+              'Fill in your contact details',
+              style: TextStyle(
+              fontSize: 18,
+              // color: Colors.grey, //TODO: replace with hint text color
+            ),),
+            const SizedBox(height: 20),
             Form(
               key: _formKey,
               child: Column(
@@ -66,12 +73,14 @@ class _ContactDetailsScreenState extends State<ContactDetailsScreen> {
                     textController: _phoneNumberTextController,
                     formFieldText: 'Phone Number',
                     formIcon: Icons.phone_outlined,
+                    textInputType: TextInputType.phone,
                   ),
                   const SizedBox(height: 20),
                   CESAAMTextFormField(
                     textController: _emailTextController,
                     formFieldText: "Email Address",
                     formIcon: Icons.email_outlined,
+                    textInputType: TextInputType.emailAddress,
                   ),
                 ],
               ),
