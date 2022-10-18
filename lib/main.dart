@@ -15,7 +15,7 @@ class CESAAMApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.green, //TODO: Define the CESAAM Theme colors
       ),
-      home: const ContactDetailsScreen(),
+      home: const SubmissionStatusScreen(),
       routes: {
         // '/': (context) => const WelcomeScreen(),
         // '/home': (context) => const HomeScreen(),

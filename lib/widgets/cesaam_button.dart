@@ -22,7 +22,7 @@ class CESAAMButton extends StatelessWidget {
         tileColor: const Color(0xff1C623B), //TODO: Change to match theme colour
         title: Center(
           child: Text(
-            buttonText.toUpperCase(),
+            buttonText,
             style: const TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.bold,
