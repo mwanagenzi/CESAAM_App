@@ -30,15 +30,21 @@ class HomeScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 mainAxisSize: MainAxisSize.max,
                 children: const [
-                  HomeScreenTile(), //TODO: Define screen tile title, description and image
-                  HomeScreenTile(),
+                  HomeScreenTile(
+                    svgAssetFilePath: "assets/svg_images/idea-suggestion.svg",
+                  ), //TODO: Define screen tile title, description and image
+                  HomeScreenTile(
+                    svgAssetFilePath: "assets/svg_images/noun-thumbs-up.svg",
+                  ),
                 ],
               ),
               const SizedBox(height: 20),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: const [
-                  HomeScreenTile(),
+                  HomeScreenTile(
+                    svgAssetFilePath: "assets/svg_images/dissatisfied.svg",
+                  ),
                 ],
               ),
             ],

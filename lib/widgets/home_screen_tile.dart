@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class HomeScreenTile extends StatelessWidget {
+  final String _svgAssetFilePath;
   const HomeScreenTile({
     Key? key,
-  }) : super(key: key);
+    required String svgAssetFilePath, 
+  })  : _svgAssetFilePath = svgAssetFilePath,
+  super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -25,22 +29,24 @@ class HomeScreenTile extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           mainAxisSize: MainAxisSize.min,
-          children: const [
-            FlutterLogo(
-              size: 75,
-            ), //TODO: Replace with relevant asset image
-            Text(
+          children: [
+            SvgPicture.asset(
+              _svgAssetFilePath,
+              height: 75,
+              width: 75,
+            ),
+            const Text(
               'Screen Title',
               style: TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 20, //TODO: define screen title text in theme settings
               ),
             ),
-            Divider(
+            const Divider(
               color: Color(0xffCA0506), //TODO: App Theme Secondary coloR
               thickness: 2,
             ),
-            Text(
+            const Text(
               "Screen Description Goes Here \n Lot's of text here",
               textAlign: TextAlign.center,
               style: TextStyle(
