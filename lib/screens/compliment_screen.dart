@@ -51,24 +51,21 @@ class _ComplimentScreenState extends State<ComplimentScreen> {
               const SizedBox(height: 20),
               Form(
                 key: _complimentFormFieldKey,
-                  child: CESAAMTextFormField(
-                    textController: _complimentTextController,
-                    formFieldText: 'Brief Description',
-                    formIcon: Icons.edit_outlined,
-                    numberOfLines: 7,
-                  )
-                
-                // FeedbackFormField(
-                //   suggestionTextController: _complimentTextController,
-                //   formFieldText: 'Brief Description of your compliment',
-                //   formIcon: Icons.edit_outlined,
-                // ),
+                child: CESAAMTextFormField(
+                  textController: _complimentTextController,
+                  formFieldText: 'Brief Description',
+                  formIcon: Icons.edit_outlined,
+                  maxNumberOfLines: 7,
+                ),
               ),
               const SizedBox(height: 20),
               CESAAMButton(
                 buttonText: 'Continue',
-                buttonFunction:
-                    () {}, //TODO; pop up the response consent dialog
+                buttonFunction: () {
+                  showDialog(
+                      context: context,
+                      builder: (_) => const ResponseConsentDialog());
+                }, //TODO; pop up the response consent dialog
               ),
             ],
           ),

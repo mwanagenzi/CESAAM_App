@@ -34,36 +34,38 @@ class _SuggestionScreenState extends State<SuggestionScreen> {
         centerTitle: true, //TODO: define in app theme
       ),
       body: SingleChildScrollView(
-        child: Padding(
-          padding:
-              EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.125),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            mainAxisSize: MainAxisSize.max,
-            children: [
-              SvgPicture.asset(
-                'assets/svg_images/Document-edit.svg',
-                color: Colors.green, //TODO: experiment with theme color
-                height: 150,
-                width: 150,
-              ), //TODO: try to search for svg implementation from rada app
-              const SizedBox(height: 20),
-              Form(
-                key: _suggestionFormFieldKey,
-                  child: CESAAMTextFormField(
-                    textController: _suggestionTextController,
-                    formFieldText: 'Brief Description',
-                    formIcon: Icons.edit_outlined,
-                    numberOfLines: 10,
-                ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          mainAxisSize: MainAxisSize.max,
+          children: [
+            const SizedBox(height: 20),
+            SvgPicture.asset(
+              'assets/svg_images/Document-edit.svg',
+              color: Colors.green, //TODO: experiment with theme color
+              height: 150,
+              width: 150,
+            ), //TODO: try to search for svg implementation from rada app
+            const SizedBox(height: 20),
+            Form(
+              key: _suggestionFormFieldKey,
+              child: CESAAMTextFormField(
+                textController: _suggestionTextController,
+                formFieldText: 'Brief Description',
+                formIcon: Icons.edit_outlined,
+                maxNumberOfLines: 10,
               ),
-              const SizedBox(height: 20),
-              CESAAMButton(
-                buttonText: 'Continue',
-                buttonFunction: () {}, //TODO; pop up the response consent dialog
-              ),
-            ],
-          ),
+            ),
+            const SizedBox(height: 20),
+            CESAAMButton(
+              buttonText: 'Continue',
+              buttonFunction: () {
+                showDialog(
+                    barrierDismissible: false,
+                    context: context,
+                    builder: (context) => ResponseConsentDialog());
+              },
+            ),
+          ],
         ),
       ),
     );

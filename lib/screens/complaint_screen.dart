@@ -53,6 +53,7 @@ class _ComplaintScreenState extends State<ComplaintScreen> {
                 textController: _complaintTextController,
                 formFieldText: "Brief description",
                 formIcon: Icons.edit_outlined,
+                maxNumberOfLines: 10,
               ),
             ),
             const SizedBox(height: 20),
@@ -156,7 +157,13 @@ class _ComplaintScreenState extends State<ComplaintScreen> {
             CESAAMButton(
               buttonText: 'Continue',
               buttonFunction:
-                  () {}, //TODO; pop up the response consent dialog
+                  () {
+                showDialog(
+                    context: context,
+                  builder: (_) => const ResponseConsentDialog(),
+                );
+                
+                  }, 
             ),
           ],
         ),
