@@ -17,15 +17,6 @@ class CESAAMApp extends StatelessWidget {
         primarySwatch: Colors.green, //TODO: Define the CESAAM Theme colors
       ),
       home: const ComplaintScreen(),
-      routes: {
-        // '/': (context) => const WelcomeScreen(),
-        // '/home': (context) => const HomeScreen(),
-        // '/home/suggestion':(context) => const SuggestionScreen(),
-        // '/home/compliment':(context) => const ComplimentScreen(),
-        // '/home/complaint':(context) => const ComplaintScreen(),
-        // '/home/personal_details':(context) => const ContactDetailsScreen(),
-        // 'home/submission_status':(context) => const SubmissionStatusScreen(),
-      },
     );
   }
 }

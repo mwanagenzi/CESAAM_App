@@ -5,3 +5,6 @@ export 'complaint_screen.dart';
 export 'suggestion_screen.dart';
 export 'contact_details _screen.dart';
 export 'submission_status_screen.dart';
+export 'developer_screen.dart';
+export 'contact_us_screen.dart';
+export 'about_us_screen.dart';
