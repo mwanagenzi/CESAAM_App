@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import '../widgets/widgets.dart';
@@ -58,6 +59,41 @@ class _ComplaintScreenState extends State<ComplaintScreen> {
                 ),
               ),
               const SizedBox(height: 20),
+              RatingBar.builder(
+                itemCount: 4,
+                maxRating: 4,
+                minRating: 1,
+                initialRating: 1,
+                  itemBuilder: (context, index) {
+                    switch (index) {
+                      case 0:
+                        return const Icon(
+                          Icons.pinch_outlined,
+                          color: Colors.green,
+                        );
+                      case 1:
+                        return const Icon(
+                          Icons.quickreply_rounded,
+                          color: Colors.yellow,
+                        );
+                      case 2:
+                        return Icon(
+                          Icons.bolt_sharp,
+                          color: Colors.orange[700],
+                        );
+                      case 3:
+                        return const Icon(
+                          Icons.priority_high,
+                          color: Colors.red,
+                        );
+                      default:
+                      return const Icon(
+                          Icons.pinch_outlined,
+                          color: Colors.green,
+                        );
+                    }
+                  },
+                  onRatingUpdate: (newRating) => print(newRating)),
               CESAAMButton(
                 buttonText: 'Continue',
                 buttonFunction:
