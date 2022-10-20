@@ -1,6 +1,3 @@
-import 'dart:js';
-
-import 'package:ceesam_app/screens/about_us_screen.dart';
 import 'package:flutter/material.dart';
 
 import '../../screens/screens.dart';
