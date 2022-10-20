@@ -1,3 +1,4 @@
+import 'package:ceesam_app/utils/routes/app_routes.dart';
 import 'package:ceesam_app/widgets/cesaam_button.dart';
 import 'package:flutter/material.dart';
 
@@ -33,7 +34,9 @@ class WelcomeScreen extends StatelessWidget {
             const Spacer(),
             CESAAMButton(
               buttonText: 'Continue',
-              buttonFunction: () {}, //TODO: navigate to onboarding screen
+              buttonFunction: () {
+                Navigator.pushNamed(context, AppRoutes.home);
+              }, //TODO: navigate to onboarding screen
             ),
             const Spacer(),
           ],

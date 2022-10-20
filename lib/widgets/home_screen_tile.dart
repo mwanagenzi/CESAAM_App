@@ -11,20 +11,25 @@ class HomeScreenTile extends StatelessWidget {
   final String _svgAssetFilePath;
   final String _tileTitle;
   final String _tileDescription;
+  final String _destinationRouteName;
   const HomeScreenTile({
     Key? key,
     required String svgAssetFilePath,
     required String tileTitle,
     required String tileDescription,
+    required String destinationRouteName,
   })  : _svgAssetFilePath = svgAssetFilePath,
         _tileTitle = tileTitle,
         _tileDescription = tileDescription,
+        _destinationRouteName = destinationRouteName,
         super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {}, //TODO: set action o navigate to relevant screen
+      onTap: () {
+        Navigator.pushNamed(context, _destinationRouteName);
+      }, //TODO: set action o navigate to relevant screen
       child: Container(
         padding: const EdgeInsets.all(10),
         width: 150,
