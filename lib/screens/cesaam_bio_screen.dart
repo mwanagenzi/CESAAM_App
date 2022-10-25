@@ -1,3 +1,4 @@
+import 'package:ceesam_app/screens/web_view_screen.dart';
 import 'package:ceesam_app/theme/color_palette.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -15,9 +16,24 @@ class CESAAMBioScreen extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         mainAxisSize: MainAxisSize.min,
         children: const [
-          CESAAMBioListTile(),
-          CESAAMBioListTile(),
-          CESAAMBioListTile(),
+          CESAAMBioListTile(
+            tileIconAssetPath: 'assets/svg_images/profile_icon.svg',
+            tileTitle: 'Our Profile',
+            tileSubtitle: 'Objectives & Achievements',
+            tileWebViewUrl: '',
+          ),
+          CESAAMBioListTile(
+            tileIconAssetPath: 'assets/svg_images/Shake-hand.svg',
+            tileTitle: 'Our Partners',
+            tileSubtitle: 'Collaborators & Sponsors',
+            tileWebViewUrl: '',
+          ),
+          CESAAMBioListTile(
+            tileIconAssetPath: 'assets/svg_images/noun-briefcase-5255752.svg',
+            tileTitle: 'Our Services',
+            tileSubtitle: 'Acitivities & Areas of Collaboration',
+            tileWebViewUrl: '',
+          ),
         ],
       ),
     ));
@@ -25,9 +41,21 @@ class CESAAMBioScreen extends StatelessWidget {
 }
 
 class CESAAMBioListTile extends StatelessWidget {
+  final String _tileIconAssetPath;
+  final String _tileTitle;
+  final String _tileSubtitle;
+  final String _tileWebViewUrl;
   const CESAAMBioListTile({
+    required String tileIconAssetPath,
+    required String tileTitle,
+    required String tileSubtitle,
+    required String tileWebViewUrl,
     Key? key,
-  }) : super(key: key);
+  })  : _tileIconAssetPath = tileIconAssetPath,
+        _tileTitle = tileTitle,
+        _tileSubtitle = tileSubtitle,
+        _tileWebViewUrl = tileWebViewUrl,
+        super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -37,18 +65,18 @@ class CESAAMBioListTile extends StatelessWidget {
         leading: CircleAvatar(
           backgroundColor: Colors.white,
           radius: 25,
-          child: SvgPicture.asset('assets/svg_images/profile_icon.svg'),
+          child: SvgPicture.asset(_tileIconAssetPath),
         ),
-        title: const Text(
-          'Our Profile',
-          style: TextStyle(
+        title: Text(
+          _tileTitle,
+          style: const TextStyle(
             fontSize: 18,
             fontWeight: FontWeight.w600,
           ),
         ),
-        subtitle: const Text(
-          'Objectives and achievements',
-          style: TextStyle(
+        subtitle: Text(
+          _tileSubtitle,
+          style: const TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.w400,
           ),
@@ -58,6 +86,13 @@ class CESAAMBioListTile extends StatelessWidget {
           color: ColorPalette.primaryColor,
         ),
         onTap: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => WebViewScreen(
+                    webViewTitle: _tileTitle,
+                    webViewUrl: 'https://flutter.dev')),
+          );
           //todo: open webview with relevant link
         },
         shape: RoundedRectangleBorder(
