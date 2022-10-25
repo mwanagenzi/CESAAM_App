@@ -76,4 +76,4 @@ class SubmissionStatusScreen extends StatelessWidget {
     );
   }
 }
-//TODO: Think of modelling this as a dialog for all the feedback screens
+//TODO: Think of modelling this as a dialog or snackbar for all the feedback screens
