@@ -74,7 +74,7 @@ class HomeScreen extends StatelessWidget {
                   HomeScreenTile(
                     svgAssetFilePath: "assets/svg_images/dissatisfied.svg",
                     tileTitle: "Complaint",
-                    tileDescription: "Identify any flaws that we can rectify",
+                    tileDescription: "Report any flaws that we can rectify",
                     destinationRouteName: AppRoutes.complaint,
                   ),
                 ],

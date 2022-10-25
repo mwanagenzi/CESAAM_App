@@ -1,14 +1,29 @@
+import 'package:ceesam_app/screens/cesaam_media_handles.dart';
+import 'package:ceesam_app/screens/cesaam_bio_screen.dart';
 import 'package:flutter/material.dart';
 
-class AboutUsScreen extends StatelessWidget {
+class AboutUsScreen extends StatefulWidget {
   const AboutUsScreen({Key? key}) : super(key: key);
+
+  @override
+  State<AboutUsScreen> createState() => _AboutUsScreenState();
+}
+
+class _AboutUsScreenState extends State<AboutUsScreen>
+    with TickerProviderStateMixin {
+  late TabController _tabController;
+  @override
+  void initState() {
+    _tabController = TabController(length: 2, vsync: this);
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          'About CESAAM',
+          'CESAAM',
           style: TextStyle(
             color: Colors.white,
             fontWeight: FontWeight.bold,
@@ -16,11 +31,23 @@ class AboutUsScreen extends StatelessWidget {
           ),
         ),
         centerTitle: true, //TODO: define in app theme
+        bottom: TabBar(
+          controller: _tabController,
+          tabs: const [
+          Tab(
+            text: 'Who We Are',
+          ),
+          Tab(
+            text: 'Media',
+          ),
+        ]),
       ),
-      body: const Center(
-        child: Text(
-          'Our Motto, services, achievements, policies etc',
-        ),
+      body: TabBarView(
+        controller: _tabController,
+        children: const [
+          CESAAMBioScreen(),
+          MediaHandlesScreen(),
+        ]
       ),
     );
   }

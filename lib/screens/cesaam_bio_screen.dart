@@ -1,51 +1,38 @@
+import 'package:ceesam_app/theme/color_palette.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
-import '../theme/color_palette.dart';
-
-class ContactUsScreen extends StatelessWidget {
-  const ContactUsScreen({Key? key}) : super(key: key);
+class CESAAMBioScreen extends StatelessWidget {
+  const CESAAMBioScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text(
-          'Our Contacts',
-          style: TextStyle(
-            color: Colors.white,
-            fontWeight: FontWeight.bold,
-            fontSize: 22,
-          ),
-        ),
-        centerTitle: true, //TODO: define in app theme
+        body: Padding(
+      padding: const EdgeInsets.only(top: 10.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        mainAxisSize: MainAxisSize.min,
+        children: const [
+          CESAAMBioListTile(),
+          CESAAMBioListTile(),
+          CESAAMBioListTile(),
+        ],
       ),
-      body: Padding(
-        padding: const EdgeInsets.only(top: 10),
-        child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisSize: MainAxisSize.min,
-            children: const [
-              CESAAMContactListTile(),
-              CESAAMContactListTile(),
-              CESAAMContactListTile(),
-              CESAAMContactListTile(),
-            ]),
-      ),
-    );
+    ));
   }
 }
 
-class CESAAMContactListTile extends StatelessWidget {
-  const CESAAMContactListTile({
+class CESAAMBioListTile extends StatelessWidget {
+  const CESAAMBioListTile({
     Key? key,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(10),
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
       child: ListTile(
         leading: CircleAvatar(
           backgroundColor: Colors.white,
