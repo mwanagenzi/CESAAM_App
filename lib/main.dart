@@ -1,6 +1,8 @@
 import 'package:ceesam_app/utils/routes/app_routing.dart';
 import 'package:flutter/material.dart';
 
+import 'screens/screens.dart';
+
 void main() {
   runApp(const CESAAMApp());
 }
@@ -11,11 +13,12 @@ class CESAAMApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primarySwatch: Colors.green, //TODO: Define the CESAAM Theme colors
-      ),
-      onGenerateRoute: generateAppRoutes,
-    );
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          primarySwatch: Colors.green, //TODO: Define the CESAAM Theme colors
+        ),
+        home: const AboutUsScreen()
+        // onGenerateRoute: generateAppRoutes,
+        );
   }
 }
