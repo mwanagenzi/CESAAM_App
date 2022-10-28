@@ -61,10 +61,11 @@ class _ComplimentScreenState extends State<ComplimentScreen> {
               const SizedBox(height: 20),
               CESAAMButton(
                 buttonText: 'Continue',
-                buttonFunction: () {
-                  showDialog(
+                buttonFunction: () async{
+                  await showDialog(
                       context: context,
                       builder: (_) => const ResponseConsentDialog());
+                      showSubmissionStatus(context, 'Submission Status message');
                 }, //TODO; pop up the response consent dialog
               ),
             ],

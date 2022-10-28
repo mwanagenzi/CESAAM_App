@@ -58,20 +58,20 @@ class _ComplaintScreenState extends State<ComplaintScreen> {
             ),
             const SizedBox(height: 20),
             const Text(
-              'How would you rate the urgency in \n addressing your complaint?',
-              textAlign: TextAlign.center,
-              style:TextStyle(
-                fontSize: 18,
+                'How would you rate the urgency in \n addressing your complaint?',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 18,
                   fontWeight: FontWeight.w400,
-              )
-            ),
+                )),
             const SizedBox(height: 10),
             Text(
               'Rating $_rating',
               style: const TextStyle(
                 fontWeight: FontWeight.w700,
                 fontSize: 16,
-            ),),
+              ),
+            ),
             const SizedBox(height: 10),
             Card(
               shape: RoundedRectangleBorder(
@@ -131,7 +131,7 @@ class _ComplaintScreenState extends State<ComplaintScreen> {
                       mainAxisSize: MainAxisSize.max,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: const[
+                      children: const [
                         RatingDescriptionText(
                             ratingTitle: '1. Minor',
                             ratingDescription: 'just a little tweak'),
@@ -156,14 +156,13 @@ class _ComplaintScreenState extends State<ComplaintScreen> {
             const SizedBox(height: 20),
             CESAAMButton(
               buttonText: 'Continue',
-              buttonFunction:
-                  () {
+              buttonFunction: () {
                 showDialog(
-                    context: context,
+                  context: context,
                   builder: (_) => const ResponseConsentDialog(),
                 );
-                
-                  }, 
+                showSubmissionStatus(context, 'Submission Status message');
+              },
             ),
           ],
         ),

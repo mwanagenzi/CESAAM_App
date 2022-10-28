@@ -58,11 +58,12 @@ class _SuggestionScreenState extends State<SuggestionScreen> {
             const SizedBox(height: 20),
             CESAAMButton(
               buttonText: 'Continue',
-              buttonFunction: () {
-                showDialog(
+              buttonFunction: () async {
+                await showDialog(
                     barrierDismissible: false,
                     context: context,
-                    builder: (context) => ResponseConsentDialog());
+                    builder: (context) => const ResponseConsentDialog());
+                showSubmissionStatus(context, 'Submission Status message');
               },
             ),
           ],
