@@ -23,3 +23,12 @@ class CESAAMApp extends StatelessWidget {
         );
   }
 }
+
+// todo: app theming
+// todo: include drop down menus to feedback screens
+// todo: configure a drop down provider
+// todo: refacor feedback screens to a single screen as well as home screen
+// todo: youtube viewer package for flutter
+// todo: welcome screen splash timer (remove continue button)
+// todo: configure the working hours card
+// todo: write some mock data and define repositories
