@@ -50,6 +50,7 @@ class _WebViewScreenState extends State<WebViewScreen> {
       body: Stack(
         children: [
           WebView(
+            javascriptMode: JavascriptMode.unrestricted,
             onWebViewCreated: (webViewController) {
               _controller.complete(webViewController);
             },
