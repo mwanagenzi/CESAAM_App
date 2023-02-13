@@ -1,12 +1,16 @@
 import 'package:ceesam_app/utils/routes/app_routes.dart';
-import 'package:ceesam_app/widgets/cesaam_button.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 class WelcomeScreen extends StatelessWidget {
   const WelcomeScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    Future.delayed(const Duration(seconds: 3)).then(
+      (value) => Navigator.popAndPushNamed(context, AppRoutes.home),
+    );
+
     return Scaffold(
       body: Center(
         child: Column(
@@ -32,13 +36,11 @@ class WelcomeScreen extends StatelessWidget {
               style: TextStyle(fontSize: 18),
             ),
             const Spacer(),
-            CESAAMButton(
-              buttonText: 'Continue',
-              buttonFunction: () {
-                Navigator.pushNamed(context, AppRoutes.home);
-              }, //TODO: navigate to onboarding screen
+            const SpinKitFadingCircle(
+              color: Colors.green,
+              size: 70,
             ),
-            const Spacer(),
+            const Spacer()
           ],
         ),
       ),

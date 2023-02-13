@@ -30,3 +30,4 @@ class CESAAMApp extends StatelessWidget {
 // todo: welcome screen splash timer (remove continue button)
 // todo: configure the working hours card
 // todo: write some mock data and define repositories
+// todo: write some tests for various parts of the code (UI and logic)
