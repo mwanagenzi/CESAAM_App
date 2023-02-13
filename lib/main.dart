@@ -1,10 +1,9 @@
-import 'package:ceesam_app/screens/location_screen.dart';
 import 'package:ceesam_app/utils/routes/app_routing.dart';
 import 'package:flutter/material.dart';
 
-import 'screens/screens.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(const CESAAMApp());
 }
 
@@ -18,8 +17,7 @@ class CESAAMApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.green, //TODO: Define the CESAAM Theme colors
         ),
-        home: const LocationTab()
-        // onGenerateRoute: generateAppRoutes,
+        onGenerateRoute: generateAppRoutes,
         );
   }
 }
