@@ -63,24 +63,38 @@ class _HomeScreenState extends State<HomeScreen> {
       body: Stack(
         children: [
           PageView(
-            //todo: set the controller
             controller: _pageController,
             onPageChanged: _updatePosition,
-            children: const [
-              OnBoardingScreen(),
-              OnBoardingScreen(),
-              OnBoardingScreen(),
+            children: [
+              HomeScreenTile(
+                imgAssetFilePath: 'assets/png_images/welcome_feedback_png.png',
+                tileDescription: 'Tile Description',
+                tileTitle: 'TileTitle',
+                tileButtonText: "Get Started",
+              ),
+              HomeScreenTile(
+                imgAssetFilePath: 'assets/png_images/welcome_feedback_png.png',
+                tileDescription: 'Tile Description',
+                tileTitle: 'TileTitle',
+                tileButtonText: "Visit Us",
+              ),
+              HomeScreenTile(
+                imgAssetFilePath: 'assets/png_images/welcome_feedback_png.png',
+                tileDescription: 'Tile Description',
+                tileTitle: 'TileTitle',
+                tileButtonText: 'Reach out',
+              ),
             ],
           ),
           Align(
-              alignment: Alignment.center,
+              alignment: Alignment.bottomCenter,
               child: DotsIndicator(
                 dotsCount: _totalDots,
                 position: _currentPosition,
                 onTap: (double page) {
                   setState(() {
                     _pageController.animateToPage(page.toInt(),
-                        duration: Duration(milliseconds: 300),
+                        duration: const Duration(milliseconds: 300),
                         curve: Curves.ease);
                   });
                 },
@@ -91,25 +105,52 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 }
 
-class OnBoardingScreen extends StatelessWidget {
-  const OnBoardingScreen({super.key});
+class HomeScreenTile extends StatelessWidget {
+  HomeScreenTile({
+    required this.imgAssetFilePath,
+    required this.tileTitle,
+    required this.tileDescription,
+    required this.tileButtonText,
+  });
+  String imgAssetFilePath;
+  String tileTitle;
+  String tileDescription;
+  String tileButtonText;
 
   @override
   Widget build(BuildContext context) {
     return Expanded(
-      child: SafeArea(
+      child: Padding(
+        padding: const EdgeInsets.only(top:10.0),
         child: Column(
           children: [
             Card(
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(15)),
-              child: Image(
-                  image:
-                      AssetImage('assets/png_images/welcome_feedback_png.png')),
+              child: Column(
+                children: [
+                  Image(image: AssetImage(imgAssetFilePath)),
+                ],
+              ),
             ),
-            const Expanded(
+            Expanded(
               child: Padding(
-                  padding: EdgeInsets.all(10.0), child: Text('The dummy text')),
+                padding: const EdgeInsets.all(10.0),
+                child: Column(
+                  children: [
+                    const SizedBox(height: 20),
+                    Text(tileTitle),
+                    const SizedBox(height: 20),
+                    Text(tileDescription),
+                    const SizedBox(height: 20),
+                    ElevatedButton(
+                      onPressed: () => {},
+                      child: Text(tileButtonText),
+                    ),
+                    const SizedBox(height: 20),
+                  ],
+                ),
+              ),
             )
           ],
         ),
