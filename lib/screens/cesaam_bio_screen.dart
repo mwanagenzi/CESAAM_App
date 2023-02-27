@@ -15,7 +15,7 @@ class CESAAMBioScreen extends StatelessWidget {
         itemCount: bioScreenItems.length,
         itemBuilder: (context, index) => bioScreenItems[index],
         separatorBuilder: (context, index) => const SizedBox(
-          height: 10,
+          height: 2,
         ),
       ),
     ));
@@ -47,7 +47,7 @@ class CESAAMBioListTile extends StatelessWidget {
         leading: CircleAvatar(
           backgroundColor: Colors.white,
           radius: 25,
-          child: SvgPicture.asset(_tileIconAssetPath),
+          child: Image(image: AssetImage(_tileIconAssetPath)),
         ),
         title: Text(
           _tileTitle,
@@ -71,16 +71,16 @@ class CESAAMBioListTile extends StatelessWidget {
           Navigator.push(
             context,
             MaterialPageRoute(
-                builder: (context) => WebViewScreen(
-                      webViewTitle: _tileTitle,
-                      webViewUrl: _tileWebViewUrl,
-                    )),
+              builder: (context) => WebViewScreen(
+                webViewTitle: _tileTitle,
+                webViewUrl: _tileWebViewUrl,
+              ),
+            ),
           );
-          //todo: open webview with relevant link
         },
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10),
-          side: BorderSide(color: ColorPalette.primaryColor, width: 2.0),
+          side: BorderSide(color: ColorPalette.primaryColor, width: 1.0),
         ),
       ),
     );
@@ -89,21 +89,21 @@ class CESAAMBioListTile extends StatelessWidget {
 
 const List<CESAAMBioListTile> bioScreenItems = [
   CESAAMBioListTile(
-    tileIconAssetPath: 'assets/svg_images/profile_icon.svg',
+    tileIconAssetPath: 'assets/png_images/profile.png',
     tileTitle: 'Our Profile',
     tileSubtitle: 'Objectives & Achievements',
     tileWebViewUrl:
         'https://cesaam.egerton.ac.ke/about-us/about-cesaam/our-profile',
   ),
   CESAAMBioListTile(
-    tileIconAssetPath: 'assets/svg_images/Shake-hand.svg',
+    tileIconAssetPath: 'assets/png_images/handshake.png',
     tileTitle: 'Our Partners',
     tileSubtitle: 'Collaborators & Sponsors',
     tileWebViewUrl:
-        'https://cesaam.egerton.ac.ke/about-us/about-cesaam/partners', //todo: what's up with this url?
+        'https://cesaam.egerton.ac.ke/about-us/about-cesaam/partners',
   ),
   CESAAMBioListTile(
-    tileIconAssetPath: 'assets/svg_images/noun-briefcase-5255752.svg',
+    tileIconAssetPath: 'assets/png_images/suitcase.png',
     tileTitle: 'Our Services',
     tileSubtitle: 'Activities & Collaborations',
     tileWebViewUrl:

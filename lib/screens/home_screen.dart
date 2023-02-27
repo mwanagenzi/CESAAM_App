@@ -71,9 +71,8 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ],
           ),
-          Positioned(
-            bottom: 100,
-            left: 165,
+          Align(
+            alignment: Alignment.bottomCenter,
             child: DotsIndicator(
               dotsCount: _totalDots,
               position: _currentPosition,
