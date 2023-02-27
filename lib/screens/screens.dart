@@ -9,4 +9,4 @@ export 'developer_screen.dart';
 export 'contact_us_screen.dart';
 export 'about_us_screen.dart';
 export 'cesaam_media_handles.dart';
-// export 'cesaam_bio_screen.dart';
+export 'feedback_details_screen.dart';

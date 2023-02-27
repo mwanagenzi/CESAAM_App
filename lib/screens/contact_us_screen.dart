@@ -43,9 +43,10 @@ class ContactUsScreen extends StatelessWidget {
                 tileSubtitle: 'Tap to open Google Maps',
               ),
               CESAAMContactListTile(
-                  tileIcon: Icons.access_time,
-                  tileTitle: 'Working hours',
-                  tileSubtitle: 'Weekdays : 0800 - 1700')
+                tileIcon: Icons.access_time,
+                tileTitle: 'Working hours',
+                tileSubtitle: 'Weekdays : 8:00am to 5:00pm',
+              ),
             ]),
       ),
     );
@@ -79,7 +80,11 @@ class CESAAMContactListTile extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(10),
       child: ListTile(
-        leading: Icon(tileIcon),
+        leading: Icon(
+          tileIcon,
+          size: 35,
+          color: Colors.black,
+        ),
         title: Text(
           tileTitle,
           style: const TextStyle(
@@ -182,13 +187,35 @@ class CESAAMContactListTile extends StatelessWidget {
               ));
 
               break;
+            case 'Physical Address':
+              //todo: open google maps
+              break;
+            case 'Working hours':
+              showDialog(
+                context: context,
+                builder: (context) => AlertDialog(
+                  title: const Text('Working Hours'),
+                  content: const Text(
+                    'We look forward to seeing you on weekdays from 8am to 5pm',
+                    softWrap: true,
+                  ),
+                  actions: [
+                    ElevatedButton(
+                      onPressed: () => Navigator.pop(context),
+                      child: const Text('OK'),
+                    ),
+                  ],
+                ),
+              );
+
+              break;
             default:
           }
           //todo: open url launcher for specific action
         },
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10),
-          side: BorderSide(color: ColorPalette.primaryColor, width: 2.0),
+          side: BorderSide(color: ColorPalette.primaryColor, width: 1.0),
         ),
       ),
     );
