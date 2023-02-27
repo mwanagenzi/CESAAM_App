@@ -5,9 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 class WebViewScreen extends StatefulWidget {
-  String webViewTitle;
-  String webViewUrl;
-  WebViewScreen({
+  final String webViewTitle;
+  final String webViewUrl;
+  const WebViewScreen({
     Key? key,
     required this.webViewTitle,
     required this.webViewUrl,

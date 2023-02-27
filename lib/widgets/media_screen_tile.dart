@@ -34,7 +34,6 @@ class MediaScreenTile extends StatelessWidget {
           ),
         ),
       ),
-      //TODO: set action o navigate to relevant screen
       child: Column(
         children: [
           Card(
