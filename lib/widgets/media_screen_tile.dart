@@ -66,69 +66,8 @@ class MediaScreenTile extends StatelessWidget {
               ],
             ),
           ),
-          // Padding(
-          //   padding: const EdgeInsets.all(10.0),
-          //   child: Column(
-          //     children: [
-          //       const SizedBox(height: 20),
-          //       Text(
-          //         tileTitle,
-          //         style: _tileTitleStyle,
-          //       ),
-          //       const SizedBox(height: 20),
-          //       Padding(
-          //         padding: const EdgeInsets.symmetric(horizontal: 40),
-          //         child: Text(
-          //           tileDescription,
-          //           style: _tileDescriptionStyle,
-          //           textAlign: TextAlign.center,
-          //         ),
-          //       ),
-          //       const SizedBox(height: 20),
-          //     ],
-          //   ),
-          // )
         ],
       ),
-      // Container(
-      //   padding: const EdgeInsets.all(10),
-      //   width: 150,
-      //   decoration: BoxDecoration(
-      //     color: const Color(0xFFD6D4D4), //TODO: Color Palette home screen
-      //     //todo: tile theme color
-      //     borderRadius: BorderRadius.circular(15),
-      //     border: Border.all(
-      //       color: const Color(0xFF2B8B23), //todo: add to theme
-      //       width: 2,
-      //     ),
-      //   ),
-      //   child: Column(
-      //     crossAxisAlignment: CrossAxisAlignment.center,
-      //     mainAxisAlignment: MainAxisAlignment.spaceAround,
-      //     mainAxisSize: MainAxisSize.min,
-      //     children: [
-      //       SvgPicture.asset(
-      //         svgAssetFilePath,
-      //         height: 75,
-      //         width: 75,
-      //       ),
-      //       Text(
-      //         tileTitle,
-      //         style: tileTitleStyle,
-      //       ),
-      //       const Divider(
-      //         color: Color(0xFFE27926), //TODO: App Theme Secondary color
-      //         thickness: 2,
-      //       ),
-      //       Text(
-      //         tileDescription,
-      //         textAlign: TextAlign.center,
-      //         style: tileDescriptionStyle,
-      //         softWrap: true,
-      //       ),
-      //     ],
-      //   ),
-      // ),
     );
   }
 }
