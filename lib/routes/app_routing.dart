@@ -15,8 +15,8 @@ Route<dynamic> generateAppRoutes(RouteSettings routeSettings) {
       return MaterialPageRoute(builder: (context) => const SuggestionScreen());
     case AppRoutes.compliment:
       return MaterialPageRoute(builder: (context) => const ComplimentScreen());
-    case AppRoutes.complaint:
-      return MaterialPageRoute(builder: (context) => const ComplaintScreen());
+    // case AppRoutes.complaint:
+    //   return MaterialPageRoute(builder: (context) => const ComplaintScreen());
     case AppRoutes.submissionStatus:
       return MaterialPageRoute(
           builder: (context) => const SubmissionStatusScreen());

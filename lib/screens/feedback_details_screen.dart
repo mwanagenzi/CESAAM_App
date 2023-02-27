@@ -1,12 +1,9 @@
 import 'package:emojis/emojis.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 import '../utils/validators/field_validator.dart';
-import '../widgets/eunccu_buttons.dart';
-import '../widgets/eunccu_drop_down_form_field.dart';
-import '../widgets/eunccu_text_form_field.dart.dart';
-import '../widgets/response_dialog.dart';
+import '../widgets/widgets.dart';
 
 const List<DropdownMenuItem<String>> feedbackItems = [
   DropdownMenuItem(value: 'Suggestion', child: Text('Suggestion')),
@@ -24,6 +21,8 @@ class FeedbackDetailsScreen extends StatefulWidget {
 class _FeedbackDetailsScreenState extends State<FeedbackDetailsScreen> {
   late TextEditingController _descriptionTextController;
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  double _rating = 1;
+  late String feedbackDropdownValue;
 
   @override
   void initState() {
@@ -57,7 +56,7 @@ class _FeedbackDetailsScreenState extends State<FeedbackDetailsScreen> {
     //     await repository.submitFeedback(feedback);
     //   }
     // }
-
+    feedbackDropdownValue = _feedbackDropdown.dropdownValue;
     return Scaffold(
       appBar: AppBar(
         title: const Text(
@@ -79,15 +78,111 @@ class _FeedbackDetailsScreenState extends State<FeedbackDetailsScreen> {
                 key: _formKey,
                 child: Column(
                   children: [
-                    _feedbackDropdown,
+                    GestureDetector(
+                        onTap: () => setState(() {
+                              _feedbackDropdown.currentDropDownValue;
+                            }),
+                        child: _feedbackDropdown),
                     const SizedBox(height: 20),
-                    EUNCCUTextFormField(
-                      textController: _descriptionTextController,
-                      formFieldText: 'Give a brief description',
-                      formIcon: Icons.description_outlined,
-                      numberOfLines: 10,
-                      fieldValidator: FieldValidator.textValidator,
-                    ),
+
+                    _feedbackDropdown.currentDropDownValue == 'Complaint'
+                        ? Card(
+                            shape: RoundedRectangleBorder(
+                              side: const BorderSide(
+                                  color: Color(0xFF1C623B), width: 0),
+                              borderRadius: BorderRadius.circular(5),
+                            ),
+                            margin: const EdgeInsets.symmetric(horizontal: 40),
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 10),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  RatingBar.builder(
+                                    direction: Axis.vertical,
+                                    itemCount: 4,
+                                    maxRating: 4.0,
+                                    minRating: 1.0,
+                                    initialRating: 1.0,
+                                    itemBuilder: (context, index) {
+                                      switch (index) {
+                                        case 0:
+                                          return const Icon(
+                                            Icons.sentiment_very_satisfied,
+                                            color: Colors.green,
+                                          );
+                                        case 1:
+                                          return const Icon(
+                                            Icons.sentiment_neutral,
+                                            color: Colors.yellow,
+                                          );
+                                        case 2:
+                                          return Icon(
+                                            Icons
+                                                .sentiment_dissatisfied_outlined,
+                                            color: Colors.orange[700],
+                                          );
+                                        case 3:
+                                          return const Icon(
+                                            Icons
+                                                .sentiment_very_dissatisfied_outlined,
+                                            color: Colors.red,
+                                          );
+                                        default:
+                                          return const Icon(
+                                            Icons.pinch_outlined,
+                                            color: Colors.green,
+                                          );
+                                      }
+                                    },
+                                    onRatingUpdate: (newRating) {
+                                      setState(() {
+                                        _rating = newRating;
+                                      });
+                                    },
+                                    updateOnDrag: true,
+                                  ),
+                                  const SizedBox(width: 10),
+                                  Column(
+                                    mainAxisSize: MainAxisSize.max,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceEvenly,
+                                    children: const [
+                                      RatingDescriptionText(
+                                          ratingTitle: '1. Minor',
+                                          ratingDescription:
+                                              'just a little tweak'),
+                                      RatingDescriptionText(
+                                        ratingTitle: '2. Significant',
+                                        ratingDescription: 'keenly look at it',
+                                      ),
+                                      RatingDescriptionText(
+                                        ratingTitle: '3. Major',
+                                        ratingDescription:
+                                            'as soon as possible',
+                                      ),
+                                      RatingDescriptionText(
+                                        ratingTitle: '4. Vital',
+                                        ratingDescription: 'Now!',
+                                      ),
+                                    ],
+                                  )
+                                ],
+                              ),
+                            ),
+                          )
+                        : EUNCCUTextFormField(
+                            textController: _descriptionTextController,
+                            formFieldText: 'Give a brief description',
+                            formIcon: Icons.description_outlined,
+                            numberOfLines: 10,
+                            fieldValidator: FieldValidator.textValidator,
+                          ),
+
+                    // buildFeedbackDescriptionWidgets(feedbackDropdownValue ==
+                    //     'Complaint'),
                     const SizedBox(height: 20),
                   ],
                 ),
@@ -96,6 +191,10 @@ class _FeedbackDetailsScreenState extends State<FeedbackDetailsScreen> {
                 buttonText: "SUBMIT",
                 buttonFunction: () async {
                   // await _sendFeedback();
+                  setState(() {
+                    feedbackDropdownValue =
+                        _feedbackDropdown.currentDropDownValue;
+                  });
                   showDialog(
                     context: context,
                     builder: (_) => ReponseAlertDialog(
@@ -111,4 +210,132 @@ class _FeedbackDetailsScreenState extends State<FeedbackDetailsScreen> {
       ),
     );
   }
+
+  // Widget buildFeedbackDescriptionWidgets(bool isComplaint) {
+  // return
+  //   isComplaint
+  //       ? Card(
+  //           shape: RoundedRectangleBorder(
+  //             side: const BorderSide(color: Color(0xFF1C623B), width: 0),
+  //             borderRadius: BorderRadius.circular(5),
+  //           ),
+  //           margin: const EdgeInsets.symmetric(horizontal: 40),
+  //           child: Padding(
+  //             padding: const EdgeInsets.symmetric(vertical: 10),
+  //             child: Row(
+  //               mainAxisAlignment: MainAxisAlignment.center,
+  //               children: [
+  //                 RatingBar.builder(
+  //                   direction: Axis.vertical,
+  //                   itemCount: 4,
+  //                   maxRating: 4.0,
+  //                   minRating: 1.0,
+  //                   initialRating: 1.0,
+  //                   itemBuilder: (context, index) {
+  //                     switch (index) {
+  //                       case 0:
+  //                         return const Icon(
+  //                           Icons.sentiment_very_satisfied,
+  //                           color: Colors.green,
+  //                         );
+  //                       case 1:
+  //                         return const Icon(
+  //                           Icons.sentiment_neutral,
+  //                           color: Colors.yellow,
+  //                         );
+  //                       case 2:
+  //                         return Icon(
+  //                           Icons.sentiment_dissatisfied_outlined,
+  //                           color: Colors.orange[700],
+  //                         );
+  //                       case 3:
+  //                         return const Icon(
+  //                           Icons.sentiment_very_dissatisfied_outlined,
+  //                           color: Colors.red,
+  //                         );
+  //                       default:
+  //                         return const Icon(
+  //                           Icons.pinch_outlined,
+  //                           color: Colors.green,
+  //                         );
+  //                     }
+  //                   },
+  //                   onRatingUpdate: (newRating) {
+  //                     setState(() {
+  //                       _rating = newRating;
+  //                     });
+  //                   },
+  //                   updateOnDrag: true,
+  //                 ),
+  //                 const SizedBox(width: 10),
+  //                 Column(
+  //                   mainAxisSize: MainAxisSize.max,
+  //                   crossAxisAlignment: CrossAxisAlignment.start,
+  //                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+  //                   children: const [
+  //                     RatingDescriptionText(
+  //                         ratingTitle: '1. Minor',
+  //                         ratingDescription: 'just a little tweak'),
+  //                     RatingDescriptionText(
+  //                       ratingTitle: '2. Significant',
+  //                       ratingDescription: 'keenly look at it',
+  //                     ),
+  //                     RatingDescriptionText(
+  //                       ratingTitle: '3. Major',
+  //                       ratingDescription: 'as soon as possible',
+  //                     ),
+  //                     RatingDescriptionText(
+  //                       ratingTitle: '4. Vital',
+  //                       ratingDescription: 'Now!',
+  //                     ),
+  //                   ],
+  //                 )
+  //               ],
+  //             ),
+  //           ),
+  //         )
+  //       : EUNCCUTextFormField(
+  //           textController: _descriptionTextController,
+  //           formFieldText: 'Give a brief description',
+  //           formIcon: Icons.description_outlined,
+  //           numberOfLines: 10,
+  //           fieldValidator: FieldValidator.textValidator,
+  //         );
+  // }
 }
+
+class RatingDescriptionText extends StatelessWidget {
+  final String _ratingTitle;
+  final String _ratingDescription;
+
+  const RatingDescriptionText({
+    Key? key,
+    required String ratingTitle,
+    required String ratingDescription,
+  })  : _ratingTitle = ratingTitle,
+        _ratingDescription = ratingDescription,
+        super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 10),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        // mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          Text(
+            _ratingTitle,
+            style: const TextStyle(fontSize: 16),
+          ),
+          Text(
+            '($_ratingDescription)',
+            style: const TextStyle(fontSize: 14, fontStyle: FontStyle.italic),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+//TODO: edit to match design
