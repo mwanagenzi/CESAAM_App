@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../screens/screens.dart';
+import '../screens/screens.dart';
 import 'app_routes.dart';
 
 Route<dynamic> generateAppRoutes(RouteSettings routeSettings) {
@@ -9,6 +9,8 @@ Route<dynamic> generateAppRoutes(RouteSettings routeSettings) {
       return MaterialPageRoute(builder: (context) => const WelcomeScreen());
     case AppRoutes.home:
       return MaterialPageRoute(builder: (context) => const HomeScreen());
+    case AppRoutes.feedback:
+      return MaterialPageRoute(builder: (context) => const FeedbackDetailsScreen());
     case AppRoutes.suggestion:
       return MaterialPageRoute(builder: (context) => const SuggestionScreen());
     case AppRoutes.compliment:

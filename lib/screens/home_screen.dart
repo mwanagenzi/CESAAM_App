@@ -1,4 +1,4 @@
-import 'package:ceesam_app/utils/routes/app_routes.dart';
+import 'package:ceesam_app/routes/app_routes.dart';
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
 
@@ -52,7 +52,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 tileDescription:
                     "We'd like to know your opinions to serve you better",
                 tileButtonText: "Get Started",
-                destinationRouteName: AppRoutes.suggestion,
+                destinationRouteName: AppRoutes.feedback,
               ),
               HomeScreenTile(
                 imgAssetFilePath: 'assets/png_images/information.png',
