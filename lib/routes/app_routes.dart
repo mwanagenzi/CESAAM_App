@@ -10,4 +10,6 @@ class AppRoutes {
   static const String contactUs = '/contactUs';
   static const String developer = '/developer';
   static const String feedback = '/feedback';
+  static const String location = '/location';
+
 }

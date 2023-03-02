@@ -62,7 +62,7 @@ class _WebViewScreenState extends State<WebViewScreen> {
             },
             onProgress: (progress) {
               setState(() {
-                _loadingPercentage = progress;
+                _loadingPercentage = progress;  
               });
             },
             onPageFinished: (url) {

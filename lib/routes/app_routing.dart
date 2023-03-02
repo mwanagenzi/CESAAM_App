@@ -20,8 +20,6 @@ Route<dynamic> generateAppRoutes(RouteSettings routeSettings) {
       );
     case AppRoutes.suggestion:
       return MaterialPageRoute(builder: (context) => const SuggestionScreen());
-    case AppRoutes.compliment:
-      return MaterialPageRoute(builder: (context) => const ComplimentScreen());
     case AppRoutes.submissionStatus:
       return MaterialPageRoute(
           builder: (context) => const SubmissionStatusScreen());
@@ -29,8 +27,8 @@ Route<dynamic> generateAppRoutes(RouteSettings routeSettings) {
       return MaterialPageRoute(builder: (context) => const AboutUsScreen());
     case AppRoutes.contactUs:
       return MaterialPageRoute(builder: (context) => const ContactUsScreen());
-    case AppRoutes.developer:
-      return MaterialPageRoute(builder: (context) => const DeveloperScreen());
+    case AppRoutes.location:
+      return MaterialPageRoute(builder: (context) => const LocationScreen());
     default:
       return MaterialPageRoute(builder: (context) => const WelcomeScreen());
   }

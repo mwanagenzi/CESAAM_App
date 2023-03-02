@@ -38,11 +38,6 @@ class ContactUsScreen extends StatelessWidget {
                     'Tap to send us an email', //todo: seek a better description
               ),
               CESAAMContactListTile(
-                tileIcon: Icons.pin_drop_outlined,
-                tileTitle: 'Physical Address',
-                tileSubtitle: 'Tap to open Google Maps',
-              ),
-              CESAAMContactListTile(
                 tileIcon: Icons.access_time,
                 tileTitle: 'Working hours',
                 tileSubtitle: 'Weekdays : 8:00am to 5:00pm',
@@ -186,9 +181,6 @@ class CESAAMContactListTile extends StatelessWidget {
                 }),
               ));
 
-              break;
-            case 'Physical Address':
-              //todo: open google maps
               break;
             case 'Working hours':
               showDialog(

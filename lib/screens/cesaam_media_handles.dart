@@ -33,25 +33,25 @@ const List<MediaScreenTile> mediaScreenItems = [
     svgAssetFilePath: 'assets/svg_images/gallery.svg',
     tileTitle: 'Gallery',
     tileDescription: 'Slide through captured moments',
-    webViewUrl: 'cesaam.egerton.ac.ke/news-media/gallery/photo-gallery',
+    webViewUrl: 'https://cesaam.egerton.ac.ke/news-media/gallery/photo-gallery',
   ),
   MediaScreenTile(
     svgAssetFilePath: 'assets/svg_images/twitter.svg',
     tileTitle: 'Twitter',
     tileDescription: 'Follow us for more info and latest trends',
-    webViewUrl: 'twitter.com/CESAAM_EGERTON',
+    webViewUrl: 'https://twitter.com/CESAAM_EGERTON',
   ),
   MediaScreenTile(
     svgAssetFilePath: 'assets/svg_images/youtube-logo.svg',
     tileTitle: 'YouTube',
     tileDescription: 'Watch our sponsored projects and events',
-    webViewUrl: 'www.youtube.com/channel/UCG90G51Xxe_hRf4-haZgfCA',
+    webViewUrl: 'https://www.youtube.com/channel/UCG90G51Xxe_hRf4-haZgfCA',
   ),
   MediaScreenTile(
     svgAssetFilePath: 'assets/svg_images/facebook-circled.svg',
     tileTitle: 'Facebook',
     tileDescription: 'Forms, Newsletters, Magazines and Reports',
     webViewUrl:
-        'www.facebook.com/CESAAM-Egerton-University-2053828481612907/',
+        'https://www.facebook.com/CESAAM-Egerton-University-2053828481612907/',
   ),
 ];
