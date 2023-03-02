@@ -90,7 +90,7 @@ class _FeedbackDetailsScreenState extends State<FeedbackDetailsScreen> {
                         fieldValidator: FieldValidator.textValidator,
                       ),
                       const SizedBox(height: 20),
-                      buildFeedbackDescriptionWidgets(
+                      buildComplaintDescriptionWidgets(
                           feedbackScreenProvider.dropdownValue == 'Complaint'),
                     ],
                   ),
@@ -117,7 +117,7 @@ class _FeedbackDetailsScreenState extends State<FeedbackDetailsScreen> {
   }
 
   //todo: implement provider to handle desired state changes
-  Widget buildFeedbackDescriptionWidgets(bool isComplaint) {
+  Widget buildComplaintDescriptionWidgets(bool isComplaint) {
     return isComplaint
         ? Column(
             children: [
