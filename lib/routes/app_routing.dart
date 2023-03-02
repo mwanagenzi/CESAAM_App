@@ -1,4 +1,6 @@
+import 'package:ceesam_app/provider/feedback_screen_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../screens/screens.dart';
 import 'app_routes.dart';
@@ -10,13 +12,16 @@ Route<dynamic> generateAppRoutes(RouteSettings routeSettings) {
     case AppRoutes.home:
       return MaterialPageRoute(builder: (context) => const HomeScreen());
     case AppRoutes.feedback:
-      return MaterialPageRoute(builder: (context) => const FeedbackDetailsScreen());
+      return MaterialPageRoute(
+        builder: (context) => ChangeNotifierProvider(
+          create: (context) => FeedbackScreenProvider(),
+          child: const FeedbackDetailsScreen(),
+        ),
+      );
     case AppRoutes.suggestion:
       return MaterialPageRoute(builder: (context) => const SuggestionScreen());
     case AppRoutes.compliment:
       return MaterialPageRoute(builder: (context) => const ComplimentScreen());
-    // case AppRoutes.complaint:
-    //   return MaterialPageRoute(builder: (context) => const ComplaintScreen());
     case AppRoutes.submissionStatus:
       return MaterialPageRoute(
           builder: (context) => const SubmissionStatusScreen());
