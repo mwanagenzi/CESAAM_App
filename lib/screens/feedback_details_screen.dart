@@ -191,11 +191,11 @@ class _FeedbackDetailsScreenState extends State<FeedbackDetailsScreen> {
                         updateOnDrag: true,
                       ),
                       const SizedBox(width: 10),
-                      Column(
+                      const Column(
                         mainAxisSize: MainAxisSize.max,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: const [
+                        children: [
                           RatingDescriptionText(
                               ratingTitle: '1. Minor',
                               ratingDescription: 'just a little tweak'),
@@ -246,7 +246,6 @@ class RatingDescriptionText extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 10),
       child: Row(
         mainAxisSize: MainAxisSize.min,
-        // mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Text(
             _ratingTitle,
