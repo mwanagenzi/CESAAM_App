@@ -5,9 +5,9 @@ class CESAAMSvgIcon extends StatelessWidget {
   final String _iconAssetFilePath;
   final double _iconHeight;
   final double _iconWidth;
-  Color? _iconColor;
+  final Color? _iconColor;
 
-  CESAAMSvgIcon({
+  const CESAAMSvgIcon({
     Key? key,
     required String iconAssetFilePath,
     required double iconHeight,

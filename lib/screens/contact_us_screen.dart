@@ -19,13 +19,13 @@ class ContactUsScreen extends StatelessWidget {
         ),
         centerTitle: true, //TODO: define in app theme
       ),
-      body: Padding(
-        padding: const EdgeInsets.only(top: 10),
+      body: const Padding(
+        padding: EdgeInsets.only(top: 10),
         child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisSize: MainAxisSize.min,
-            children: const [
+            children: [
               CESAAMContactListTile(
                 tileIcon: Icons.call_rounded,
                 tileTitle: 'Phone Number',
@@ -134,7 +134,7 @@ class CESAAMContactListTile extends StatelessWidget {
                                 ),
                                 Text(
                                   'Phone',
-                                  style: Theme.of(context).textTheme.headline6,
+                                  style: Theme.of(context).textTheme.titleLarge,
                                 )
                               ],
                             ),
@@ -163,7 +163,7 @@ class CESAAMContactListTile extends StatelessWidget {
                                 ),
                                 Text(
                                   'SMS',
-                                  style: Theme.of(context).textTheme.headline6,
+                                  style: Theme.of(context).textTheme.titleLarge,
                                 )
                               ],
                             ),

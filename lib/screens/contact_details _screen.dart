@@ -58,7 +58,7 @@ class _ContactDetailsScreenState extends State<ContactDetailsScreen> {
               fontSize: 18,
               // color: Colors.grey, //TODO: replace with hint text color
             ),),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             Form(
               key: _formKey,
               child: Column(

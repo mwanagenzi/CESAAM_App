@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class CESAAMTextFormField extends StatelessWidget {
-  CESAAMTextFormField({
+  const CESAAMTextFormField({super.key, 
     required TextEditingController textController,
     required String formFieldText,
     required IconData formIcon,
@@ -31,7 +31,7 @@ class CESAAMTextFormField extends StatelessWidget {
         // validator: _emailValidator, //TODO: set individual validators
         decoration: InputDecoration(
           labelText: _formFieldText,
-          labelStyle: Theme.of(context).textTheme.bodyText2,
+          labelStyle: Theme.of(context).textTheme.bodyMedium,
           prefixIcon: Icon(
             _formIcon,
             color: Colors.black,

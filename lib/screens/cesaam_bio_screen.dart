@@ -1,7 +1,6 @@
 import 'package:ceesam_app/screens/web_view_screen.dart';
 import 'package:ceesam_app/theme/color_palette.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 class CESAAMBioScreen extends StatelessWidget {
   const CESAAMBioScreen({Key? key}) : super(key: key);
