@@ -1,4 +1,5 @@
 import 'package:ceesam_app/provider/feedback_screen_provider.dart';
+import 'package:ceesam_app/widgets/feedback_response_consent_dialog.dart';
 import 'package:emojis/emojis.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
@@ -116,7 +117,18 @@ class _FeedbackDetailsScreenState extends State<FeedbackDetailsScreen> {
                 EUNCCUFilledButton(
                   buttonText: "SUBMIT",
                   buttonFunction: () async {
+                    if (_isChecked!) {
+                      showDialog(
+                          context: context,
+                          builder: (_) =>
+                              const FeedbackResponseConsentDialog());
+                    }
+
                     // await _sendFeedback();
+                    await Future.delayed(const Duration(
+                        seconds:
+                            5)); //todo: replace this with the endpoint call.
+
                     showDialog(
                       context: context,
                       builder: (_) => ReponseAlertDialog(
@@ -124,8 +136,6 @@ class _FeedbackDetailsScreenState extends State<FeedbackDetailsScreen> {
                               'Your feedback has been submitted. Thank you.${Emojis.thumbsUp}'),
                     );
                     clearTextField();
-                    //todo: set up a checkbox to request whether respondent would like to submit personal details for response on their feedback.
-                    //todo: if respondent agrees, show a dialog with three input fields, first_name, surname and email
                   },
                 ),
               ],
@@ -136,7 +146,6 @@ class _FeedbackDetailsScreenState extends State<FeedbackDetailsScreen> {
     );
   }
 
-  //todo: implement provider to handle desired state changes
   Widget buildComplaintDescriptionWidgets(bool isComplaint) {
     return isComplaint
         ? Column(
