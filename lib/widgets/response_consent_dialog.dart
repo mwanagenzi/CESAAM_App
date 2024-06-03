@@ -1,7 +1,7 @@
 import 'package:ceesam_app/theme/color_palette.dart';
 import 'package:flutter/material.dart';
 
-import '../screens/contact_details _screen.dart';
+import '../screens/contact_details_screen.dart';
 
 class ResponseConsentDialog extends StatelessWidget {
   const ResponseConsentDialog({

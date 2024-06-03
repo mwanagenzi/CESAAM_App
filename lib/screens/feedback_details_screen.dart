@@ -23,7 +23,9 @@ class FeedbackDetailsScreen extends StatefulWidget {
 class _FeedbackDetailsScreenState extends State<FeedbackDetailsScreen> {
   late TextEditingController _descriptionTextController;
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
   double _rating = 1;
+  bool? _isChecked = false;
 
   @override
   void initState() {
@@ -45,18 +47,22 @@ class _FeedbackDetailsScreenState extends State<FeedbackDetailsScreen> {
     formFieldIcon: Icons.feedback_outlined,
   );
 
+  // Future<void> _sendFeedback() async {
+  //   if (_formKey.currentState!.validate()) {
+  //     final feedback = FeedbackDetails(
+  //       description: ,
+  //         responseType: ,
+  //
+  //         // type: _feedbackDropdown.currentDropDownValue,
+  //         // description: _descriptionTextController.text
+  //         );
+  //     await NetworkHelper.submitFeedback(feedback);
+  //   }
+  // }
+
   @override
   Widget build(BuildContext context) {
     // final repository = Provider.of<FirebaseRepository>(context, listen: false);
-
-    // Future<void> _sendFeedback() async {
-    //   if (_formKey.currentState!.validate()) {
-    //     final feedback = FeedbackDetails(
-    //         type: _feedbackDropdown.currentDropDownValue,
-    //         description: _descriptionTextController.text);
-    //     await repository.submitFeedback(feedback);
-    //   }
-    // }
     return Consumer<FeedbackScreenProvider>(
       builder: (context, feedbackScreenProvider, _) => Scaffold(
         appBar: AppBar(
@@ -90,6 +96,18 @@ class _FeedbackDetailsScreenState extends State<FeedbackDetailsScreen> {
                         fieldValidator: FieldValidator.textValidator,
                       ),
                       const SizedBox(height: 20),
+                      CheckboxListTile(
+                        contentPadding:
+                            const EdgeInsets.symmetric(horizontal: 40),
+                        value: _isChecked,
+                        onChanged: (value) => setState(() {
+                          _isChecked = value;
+                        }),
+                        title: const Text(
+                            "Receive follow up email on your feedback?"),
+                        controlAffinity: ListTileControlAffinity.leading,
+                      ),
+                      const SizedBox(height: 20),
                       buildComplaintDescriptionWidgets(
                           feedbackScreenProvider.dropdownValue == 'Complaint'),
                     ],
@@ -106,6 +124,8 @@ class _FeedbackDetailsScreenState extends State<FeedbackDetailsScreen> {
                               'Your feedback has been submitted. Thank you.${Emojis.thumbsUp}'),
                     );
                     clearTextField();
+                    //todo: set up a checkbox to request whether respondent would like to submit personal details for response on their feedback.
+                    //todo: if respondent agrees, show a dialog with three input fields, first_name, surname and email
                   },
                 ),
               ],
@@ -260,5 +280,3 @@ class RatingDescriptionText extends StatelessWidget {
     );
   }
 }
-
-//TODO: edit to match design
