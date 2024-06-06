@@ -1,8 +1,15 @@
 import 'package:ceesam_app/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 
+import '../models/feedback_details.dart';
+import '../services/network_helper.dart';
+
 class FeedbackResponseConsentDialog extends StatefulWidget {
-  const FeedbackResponseConsentDialog({super.key});
+  const FeedbackResponseConsentDialog(
+      {super.key, required this.responseType, required this.description});
+
+  final String description;
+  final String responseType;
 
   @override
   State<FeedbackResponseConsentDialog> createState() =>
@@ -22,6 +29,14 @@ class _FeedbackResponseConsentDialogState
     _surnameTextController = TextEditingController();
     _emailTextController = TextEditingController();
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    _firstNameTextController.dispose();
+    _surnameTextController.dispose();
+    _emailTextController.dispose();
+    super.dispose();
   }
 
   @override
@@ -56,7 +71,18 @@ class _FeedbackResponseConsentDialogState
       ),
       actions: [
         ElevatedButton(
-          onPressed: () => Navigator.pop(context),
+          onPressed: () async {
+            //todo: send feedback here
+            //todo: show response alert dialog
+            //todo: pop until
+            await NetworkHelper.submitFeedback(FeedbackDetails(
+                description: widget.description,
+                responseType: widget.responseType,
+                respondToFeedback: true,
+                firstName: _firstNameTextController.text,
+                surname: _surnameTextController.text,
+                email: _emailTextController.text));
+          },
           child: const Text('SUBMIT'),
         ),
         OutlinedButton(

@@ -1,10 +1,12 @@
 import 'package:ceesam_app/provider/feedback_screen_provider.dart';
+import 'package:ceesam_app/services/network_helper.dart';
 import 'package:ceesam_app/widgets/feedback_response_consent_dialog.dart';
 import 'package:emojis/emojis.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:provider/provider.dart';
 
+import '../models/feedback_details.dart';
 import '../utils/validators/field_validator.dart';
 import '../widgets/widgets.dart';
 
@@ -48,18 +50,14 @@ class _FeedbackDetailsScreenState extends State<FeedbackDetailsScreen> {
     formFieldIcon: Icons.feedback_outlined,
   );
 
-  // Future<void> _sendFeedback() async {
-  //   if (_formKey.currentState!.validate()) {
-  //     final feedback = FeedbackDetails(
-  //       description: ,
-  //         responseType: ,
-  //
-  //         // type: _feedbackDropdown.currentDropDownValue,
-  //         // description: _descriptionTextController.text
-  //         );
-  //     await NetworkHelper.submitFeedback(feedback);
-  //   }
-  // }
+  Future<Map<String, dynamic>> _sendNamelessFeedback(
+      FeedbackDetails feedbackDetails) async {
+    var response = <String, dynamic>{};
+    if (_formKey.currentState!.validate()) {
+      response = await NetworkHelper.submitFeedback(feedbackDetails);
+    }
+    return response;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -120,14 +118,22 @@ class _FeedbackDetailsScreenState extends State<FeedbackDetailsScreen> {
                     if (_isChecked!) {
                       showDialog(
                           context: context,
-                          builder: (_) =>
-                              const FeedbackResponseConsentDialog());
+                          builder: (_) => FeedbackResponseConsentDialog(
+                                responseType: _feedbackDropdown.dropdownValue,
+                                description: _descriptionTextController.text,
+                              ));
                     }
-
                     // await _sendFeedback();
-                    await Future.delayed(const Duration(
-                        seconds:
-                            5)); //todo: replace this with the endpoint call.
+                    // await Future.delayed(const Duration(
+                    //     seconds:
+                    //         5)); //todo: replace this with the endpoint call.
+
+                    await _sendNamelessFeedback(
+                      FeedbackDetails(
+                          description: _descriptionTextController.text,
+                          responseType: _feedbackDropdown.dropdownValue,
+                          respondToFeedback: false),
+                    );
 
                     showDialog(
                       context: context,

@@ -1,10 +1,11 @@
 class FeedbackDetails {
-  late final String description;
-  late final String responseType;
+  final String description;
+  final String responseType;
+  String? urgencyLevel;
   String? firstName;
   String? surname;
   String? email;
-  late bool respondToFeedback;
+  final bool respondToFeedback;
 
   FeedbackDetails({
     required this.description,
@@ -13,6 +14,7 @@ class FeedbackDetails {
     this.surname,
     this.email,
     required this.respondToFeedback,
+    this.urgencyLevel,
   });
 
   Map<String, String> toJson() => {
@@ -21,6 +23,7 @@ class FeedbackDetails {
         'first_name': firstName ?? '',
         'surname': surname ?? '',
         'email': email ?? '',
-        'respond_to_feedback': respondToFeedback.toString()
+        'respond_to_feedback': respondToFeedback.toString(),
+        'urgency_level': urgencyLevel ?? '0'
       };
 }

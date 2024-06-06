@@ -13,6 +13,7 @@ class ReponseAlertDialog extends StatelessWidget {
       content: Text(
         message,
         softWrap: true,
+        textAlign: TextAlign.justify,
       ),
       actions: [
         ElevatedButton(
