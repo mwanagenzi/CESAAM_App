@@ -1,7 +1,7 @@
 class FeedbackDetails {
   final String description;
   final String responseType;
-  String? urgencyLevel;
+  int? urgencyLevel;
   String? firstName;
   String? surname;
   String? email;
@@ -17,13 +17,13 @@ class FeedbackDetails {
     this.urgencyLevel,
   });
 
-  Map<String, String> toJson() => {
+  Map<String, dynamic> toJson() => {
         'description': description,
         'response_type': responseType,
         'first_name': firstName ?? '',
         'surname': surname ?? '',
         'email': email ?? '',
         'respond_to_feedback': respondToFeedback.toString(),
-        'urgency_level': urgencyLevel ?? '0'
+        'urgency_level': urgencyLevel ?? 0
       };
 }
