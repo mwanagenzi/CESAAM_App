@@ -98,11 +98,11 @@ class _FeedbackDetailsScreenState extends State<FeedbackDetailsScreen> {
         //error dialog
         debugPrint(e.message);
         return <String, dynamic>{'message': "HTTP Exception ${e.message}"};
-      } on SocketException catch (e) {
+      } on SocketException {
         setState(() => _isLoading = false);
         //error dialog
-        debugPrint("Socket Exception ${e.message}");
-        return <String, dynamic>{'message': e.message};
+        debugPrint("Socket Exception");
+        return <String, dynamic>{'message': "Check your internet connection"};
       }
       // on FormatException catch (e) {
       //   setState(() => _isLoading = false);

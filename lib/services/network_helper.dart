@@ -8,7 +8,6 @@ import 'package:http/http.dart';
 class NetworkHelper {
   static Future<Map<String, dynamic>> submitFeedback(
       FeedbackDetails feedbackDetails) async {
-    debugPrint("Feedback details : ${feedbackDetails.toJson()}");
     final response = await post(
         Uri.parse("${AppConstants.BASE_URL}/api/feedback"),
         headers: <String, String>{'Content-Type': 'application/json'},
