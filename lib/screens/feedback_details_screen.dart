@@ -4,9 +4,9 @@ import 'package:ceesam_app/provider/feedback_screen_provider.dart';
 import 'package:ceesam_app/services/network_helper.dart';
 import 'package:ceesam_app/theme/color_palette.dart';
 import 'package:ceesam_app/widgets/feedback_response_consent_dialog.dart';
-import 'package:emojis/emojis.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:provider/provider.dart';
 
 import '../models/feedback_details.dart';
@@ -69,14 +69,14 @@ class _FeedbackDetailsScreenState extends State<FeedbackDetailsScreen> {
         ));
   }
 
-  SnackBar _showErrorSnackBar(String errorMessage) {
+  SnackBar _showFeedbackSnackBar(String message) {
     return SnackBar(
-        backgroundColor: ColorPalette.secondaryColor,
+        backgroundColor: ColorPalette.primaryColor,
         elevation: 5.0,
         behavior: SnackBarBehavior.floating,
         margin: const EdgeInsets.symmetric(horizontal: 20),
         content: Text(
-          errorMessage,
+          message,
           style: Theme.of(context)
               .textTheme
               .bodyMedium
@@ -84,37 +84,43 @@ class _FeedbackDetailsScreenState extends State<FeedbackDetailsScreen> {
         ));
   }
 
-  Future<void> _sendNamelessFeedback(FeedbackDetails feedbackDetails) async {
+  Future<Map<String, dynamic>> _sendNamelessFeedback(
+      FeedbackDetails feedbackDetails) async {
     if (_formKey.currentState!.validate()) {
       try {
         var jsonMap = await NetworkHelper.submitFeedback(feedbackDetails);
-
-        if (jsonMap['success']) {
-          setState(() => _isLoading = false);
-          ScaffoldMessenger.of(context)
-              .showSnackBar(_showSuccessSnackBar(jsonMap['message']));
-        } else {
-          setState(() => _isLoading = false);
-          ScaffoldMessenger.of(context)
-              .showSnackBar(_showErrorSnackBar(jsonMap['message']));
-        }
+        return <String, dynamic>{
+          'success': jsonMap['success'],
+          'message': jsonMap['message']
+        };
       } on HttpException catch (e) {
         setState(() => _isLoading = false);
         //error dialog
-        print(e);
+        debugPrint(e.message);
+        return <String, dynamic>{'message': "HTTP Exception ${e.message}"};
       } on SocketException catch (e) {
         setState(() => _isLoading = false);
         //error dialog
-        debugPrint(e.message);
-      } on FormatException catch (e) {
-        setState(() => _isLoading = false);
-        //error dialog
-        debugPrint(e.message);
-      } catch (e) {
-        debugPrint(e.toString());
+        debugPrint("Socket Exception ${e.message}");
+        return <String, dynamic>{'message': e.message};
       }
-
-      //set progress bar to load
+      // on FormatException catch (e) {
+      //   setState(() => _isLoading = false);
+      //   //error dialog
+      //   debugPrint("Format Exception ${e.message}");
+      //   return <String, dynamic>{'message': e.message};
+      // }
+      catch (e) {
+        debugPrint("Unknown Exception : ${e.toString()}");
+        return <String, dynamic>{
+          'message':
+              "Error in uploading your feedback. Contact admin for support"
+        };
+      }
+    } else {
+      return <String, dynamic>{
+        'message': "Kindly check the format of your input data"
+      };
     }
   }
 
@@ -171,38 +177,52 @@ class _FeedbackDetailsScreenState extends State<FeedbackDetailsScreen> {
                     ],
                   ),
                 ),
-                EUNCCUFilledButton(
-                  buttonText: "SUBMIT",
-                  buttonFunction: () async {
-                    if (_isChecked!) {
-                      showDialog(
-                          context: context,
-                          builder: (_) => FeedbackResponseConsentDialog(
-                                responseType: _feedbackDropdown.dropdownValue,
+                _isLoading
+                    ? SpinKitFadingCircle(
+                        color: ColorPalette.primaryColor,
+                        size: 70,
+                      )
+                    : EUNCCUFilledButton(
+                        buttonText: "SUBMIT",
+                        buttonFunction: () async {
+                          if (_isChecked!) {
+                            showDialog(
+                                context: context,
+                                builder: (_) => FeedbackResponseConsentDialog(
+                                      responseType:
+                                          _feedbackDropdown.dropdownValue,
+                                      description:
+                                          _descriptionTextController.text,
+                                    ));
+                          }
+
+                          setState(() => _isLoading = true);
+
+                          var response = await _sendNamelessFeedback(
+                            FeedbackDetails(
                                 description: _descriptionTextController.text,
-                              ));
-                    }
-                    // await _sendFeedback();
-                    // await Future.delayed(const Duration(
-                    //     seconds:
-                    //         5)); //todo: replace this with the endpoint call.
+                                responseType: _feedbackDropdown.dropdownValue,
+                                respondToFeedback: false),
+                          );
 
-                    await _sendNamelessFeedback(
-                      FeedbackDetails(
-                          description: _descriptionTextController.text,
-                          responseType: _feedbackDropdown.dropdownValue,
-                          respondToFeedback: false),
-                    );
-
-                    showDialog(
-                      context: context,
-                      builder: (_) => ReponseAlertDialog(
-                          message:
-                              'Your feedback has been submitted. Thank you.${Emojis.thumbsUp}'),
-                    );
-                    clearTextField();
-                  },
-                ),
+                          response.containsKey('success') && response['success']
+                              ? {
+                                  setState(() => _isLoading = false),
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                      _showFeedbackSnackBar(
+                                          response['message']))
+                                }
+                              : {
+                                  setState(() => _isLoading = false),
+                                  showDialog(
+                                    context: context,
+                                    builder: (_) => ReponseErrorDialog(
+                                        message: response['message']),
+                                  )
+                                };
+                          clearTextField();
+                        },
+                      ),
               ],
             ),
           ),
