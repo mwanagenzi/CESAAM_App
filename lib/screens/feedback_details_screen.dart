@@ -1,5 +1,8 @@
+import 'dart:io';
+
 import 'package:ceesam_app/provider/feedback_screen_provider.dart';
 import 'package:ceesam_app/services/network_helper.dart';
+import 'package:ceesam_app/theme/color_palette.dart';
 import 'package:ceesam_app/widgets/feedback_response_consent_dialog.dart';
 import 'package:emojis/emojis.dart';
 import 'package:flutter/material.dart';
@@ -29,6 +32,7 @@ class _FeedbackDetailsScreenState extends State<FeedbackDetailsScreen> {
 
   double _rating = 1;
   bool? _isChecked = false;
+  bool _isLoading = false;
 
   @override
   void initState() {
@@ -50,13 +54,68 @@ class _FeedbackDetailsScreenState extends State<FeedbackDetailsScreen> {
     formFieldIcon: Icons.feedback_outlined,
   );
 
-  Future<Map<String, dynamic>> _sendNamelessFeedback(
-      FeedbackDetails feedbackDetails) async {
-    var response = <String, dynamic>{};
+  SnackBar _showSuccessSnackBar(String successMessage) {
+    return SnackBar(
+        backgroundColor: ColorPalette.primaryColor,
+        elevation: 5.0,
+        behavior: SnackBarBehavior.floating,
+        margin: const EdgeInsets.symmetric(horizontal: 20),
+        content: Text(
+          successMessage,
+          style: Theme.of(context)
+              .textTheme
+              .bodyMedium
+              ?.copyWith(color: Colors.white),
+        ));
+  }
+
+  SnackBar _showErrorSnackBar(String errorMessage) {
+    return SnackBar(
+        backgroundColor: ColorPalette.secondaryColor,
+        elevation: 5.0,
+        behavior: SnackBarBehavior.floating,
+        margin: const EdgeInsets.symmetric(horizontal: 20),
+        content: Text(
+          errorMessage,
+          style: Theme.of(context)
+              .textTheme
+              .bodyMedium
+              ?.copyWith(color: Colors.white),
+        ));
+  }
+
+  Future<void> _sendNamelessFeedback(FeedbackDetails feedbackDetails) async {
     if (_formKey.currentState!.validate()) {
-      response = await NetworkHelper.submitFeedback(feedbackDetails);
+      try {
+        var jsonMap = await NetworkHelper.submitFeedback(feedbackDetails);
+
+        if (jsonMap['success']) {
+          setState(() => _isLoading = false);
+          ScaffoldMessenger.of(context)
+              .showSnackBar(_showSuccessSnackBar(jsonMap['message']));
+        } else {
+          setState(() => _isLoading = false);
+          ScaffoldMessenger.of(context)
+              .showSnackBar(_showErrorSnackBar(jsonMap['message']));
+        }
+      } on HttpException catch (e) {
+        setState(() => _isLoading = false);
+        //error dialog
+        print(e);
+      } on SocketException catch (e) {
+        setState(() => _isLoading = false);
+        //error dialog
+        debugPrint(e.message);
+      } on FormatException catch (e) {
+        setState(() => _isLoading = false);
+        //error dialog
+        debugPrint(e.message);
+      } catch (e) {
+        debugPrint(e.toString());
+      }
+
+      //set progress bar to load
     }
-    return response;
   }
 
   @override

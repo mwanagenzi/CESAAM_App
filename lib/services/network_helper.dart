@@ -12,7 +12,7 @@ class NetworkHelper {
     final response = await post(
         Uri.parse("${AppConstants.BASE_URL}/api/feedback"),
         headers: <String, String>{'Content-Type': 'application/json'},
-        body: jsonEncode(feedbackDetails.toJson()));
+        body: feedbackDetails.toJson());
 
     debugPrint("Response details before status code: $response");
 
