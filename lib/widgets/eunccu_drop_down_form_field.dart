@@ -31,6 +31,7 @@ class _EUNCCUDropdownFormFieldState extends State<EUNCCUDropdownFormField> {
       builder: (context, feedbackScreenProvider, child) => Padding(
         padding: const EdgeInsets.symmetric(horizontal: 40),
         child: DropdownButtonFormField(
+          dropdownColor: Colors.white,
           items: widget.dropdownItems,
           value: widget.dropdownValue,
           onChanged: (String? selectedValue) {
