@@ -52,21 +52,6 @@ class _FeedbackDetailsScreenState extends State<FeedbackDetailsScreen> {
     formFieldIcon: Icons.feedback_outlined,
   );
 
-  SnackBar _showSuccessSnackBar(String successMessage) {
-    return SnackBar(
-        backgroundColor: ColorPalette.primaryColor,
-        elevation: 5.0,
-        behavior: SnackBarBehavior.floating,
-        margin: const EdgeInsets.symmetric(horizontal: 20),
-        content: Text(
-          successMessage,
-          style: Theme.of(context)
-              .textTheme
-              .bodyMedium
-              ?.copyWith(color: Colors.white),
-        ));
-  }
-
   SnackBar _showFeedbackSnackBar(String message) {
     return SnackBar(
         backgroundColor: ColorPalette.primaryColor,
@@ -93,7 +78,7 @@ class _FeedbackDetailsScreenState extends State<FeedbackDetailsScreen> {
           'message': jsonMap['message']
         };
       } catch (e) {
-        debugPrint("Unknown Exception Here: ${e.toString()}");
+        debugPrint("Unknown Exception In Screen: ${e.toString()}");
         return <String, dynamic>{
           'message':
               "Error in uploading your feedback. Contact admin for support"
@@ -175,34 +160,58 @@ class _FeedbackDetailsScreenState extends State<FeedbackDetailsScreen> {
                                           _feedbackDropdown.dropdownValue,
                                       description:
                                           _descriptionTextController.text,
+                                      onClearTextFields: () => clearTextField(),
                                     ));
+                          } else {
+                            setState(() => _isLoading = true);
+
+                            try {
+                              var response = feedbackScreenProvider
+                                          .dropdownValue !=
+                                      'Complaint'
+                                  ? await _sendNamelessFeedback(
+                                      FeedbackDetails(
+                                          description:
+                                              _descriptionTextController.text,
+                                          responseType:
+                                              _feedbackDropdown.dropdownValue,
+                                          respondToFeedback: false),
+                                    )
+                                  : await _sendNamelessFeedback(
+                                      FeedbackDetails(
+                                        description:
+                                            _descriptionTextController.text,
+                                        responseType:
+                                            _feedbackDropdown.dropdownValue,
+                                        respondToFeedback: false,
+                                        urgencyLevel: _rating.toInt(),
+                                      ),
+                                    );
+                              if (response.containsKey('success') &&
+                                  response['success']) {
+                                setState(() => _isLoading = false);
+
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                    _showFeedbackSnackBar(response['message']));
+                              } else {
+                                setState(() => _isLoading = false);
+                                showDialog(
+                                  context: context,
+                                  builder: (_) => ReponseErrorDialog(
+                                      message: response['message']),
+                                );
+                              }
+                            } catch (e) {
+                              //todo: Log in Firebase Crashlytics
+                              showDialog(
+                                context: context,
+                                builder: (_) => ReponseErrorDialog(
+                                    message:
+                                        "Error in uploading your feedback. Try again later or contact admin for support."),
+                              );
+                            }
+                            clearTextField();
                           }
-
-                          setState(() => _isLoading = true);
-
-                          var response = await _sendNamelessFeedback(
-                            FeedbackDetails(
-                                description: _descriptionTextController.text,
-                                responseType: _feedbackDropdown.dropdownValue,
-                                respondToFeedback: false),
-                          );
-
-                          response.containsKey('success') && response['success']
-                              ? {
-                                  setState(() => _isLoading = false),
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                      _showFeedbackSnackBar(
-                                          response['message']))
-                                }
-                              : {
-                                  setState(() => _isLoading = false),
-                                  showDialog(
-                                    context: context,
-                                    builder: (_) => ReponseErrorDialog(
-                                        message: response['message']),
-                                  )
-                                };
-                          clearTextField();
                         },
                       ),
               ],
