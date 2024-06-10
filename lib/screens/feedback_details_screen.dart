@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:ceesam_app/provider/feedback_screen_provider.dart';
 import 'package:ceesam_app/services/network_helper.dart';
 import 'package:ceesam_app/theme/color_palette.dart';
@@ -72,9 +70,10 @@ class _FeedbackDetailsScreenState extends State<FeedbackDetailsScreen> {
   SnackBar _showFeedbackSnackBar(String message) {
     return SnackBar(
         backgroundColor: ColorPalette.primaryColor,
-        elevation: 5.0,
+        elevation: 15.0,
         behavior: SnackBarBehavior.floating,
-        margin: const EdgeInsets.symmetric(horizontal: 20),
+        margin: const EdgeInsets.symmetric(horizontal: 20)
+            .add(const EdgeInsets.only(bottom: 20)),
         content: Text(
           message,
           style: Theme.of(context)
@@ -93,25 +92,8 @@ class _FeedbackDetailsScreenState extends State<FeedbackDetailsScreen> {
           'success': jsonMap['success'],
           'message': jsonMap['message']
         };
-      } on HttpException catch (e) {
-        setState(() => _isLoading = false);
-        //error dialog
-        debugPrint(e.message);
-        return <String, dynamic>{'message': "HTTP Exception ${e.message}"};
-      } on SocketException {
-        setState(() => _isLoading = false);
-        //error dialog
-        debugPrint("Socket Exception");
-        return <String, dynamic>{'message': "Check your internet connection"};
-      }
-      // on FormatException catch (e) {
-      //   setState(() => _isLoading = false);
-      //   //error dialog
-      //   debugPrint("Format Exception ${e.message}");
-      //   return <String, dynamic>{'message': e.message};
-      // }
-      catch (e) {
-        debugPrint("Unknown Exception : ${e.toString()}");
+      } catch (e) {
+        debugPrint("Unknown Exception Here: ${e.toString()}");
         return <String, dynamic>{
           'message':
               "Error in uploading your feedback. Contact admin for support"
@@ -156,7 +138,7 @@ class _FeedbackDetailsScreenState extends State<FeedbackDetailsScreen> {
                         textController: _descriptionTextController,
                         formFieldText: 'Give a brief description',
                         formIcon: Icons.description_outlined,
-                        numberOfLines: 10,
+                        numberOfLines: 5,
                         fieldValidator: FieldValidator.textValidator,
                       ),
                       const SizedBox(height: 20),
