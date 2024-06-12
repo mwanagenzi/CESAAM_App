@@ -1,5 +1,5 @@
-import 'package:ceesam_app/screens/cesaam_media_handles.dart';
 import 'package:ceesam_app/screens/cesaam_bio_screen.dart';
+import 'package:ceesam_app/screens/cesaam_media_handles.dart';
 import 'package:flutter/material.dart';
 
 class AboutUsScreen extends StatefulWidget {
@@ -32,23 +32,21 @@ class _AboutUsScreenState extends State<AboutUsScreen>
         ),
         centerTitle: true, //TODO: define in app theme
         bottom: TabBar(
-          controller: _tabController,
-          tabs: const [
-          Tab(
-            text: 'Who We Are',
-          ),
-          Tab(
-            text: 'Media',
-          ),
-        ]),
+            controller: _tabController,
+            labelStyle: const TextStyle(color: Colors.white),
+            tabs: const [
+              Tab(
+                text: 'Who We Are',
+              ),
+              Tab(
+                text: 'Media',
+              ),
+            ]),
       ),
-      body: TabBarView(
-        controller: _tabController,
-        children: const [
-          CESAAMBioScreen(),
-          MediaHandlesScreen(),
-        ]
-      ),
+      body: TabBarView(controller: _tabController, children: const [
+        CESAAMBioScreen(),
+        MediaHandlesScreen(),
+      ]),
     );
   }
 }

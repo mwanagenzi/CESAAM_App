@@ -18,8 +18,8 @@ class CESAAMTheme {
         centerTitle: true,
       ),
       dividerColor: ColorPalette.secondaryColor,
-      //TODO: Configure google fonts for app-wide use
       scaffoldBackgroundColor: Colors.white,
+      dialogBackgroundColor: Colors.white,
     );
   }
   //TODO: define app wide text theme
