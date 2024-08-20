@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 
-class ReponseAlertDialog extends StatelessWidget {
+class ReponseErrorDialog extends StatelessWidget {
   String message;
-  ReponseAlertDialog({
+
+  ReponseErrorDialog({
     Key? key,
     required this.message,
   }) : super(key: key);
@@ -10,9 +11,13 @@ class ReponseAlertDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
+      title: Text(
+        "Error!",
+      ),
       content: Text(
         message,
         softWrap: true,
+        textAlign: TextAlign.start,
       ),
       actions: [
         ElevatedButton(

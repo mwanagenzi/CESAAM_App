@@ -1,10 +1,13 @@
 import 'package:ceesam_app/provider/feedback_screen_provider.dart';
+import 'package:ceesam_app/services/network_helper.dart';
+import 'package:ceesam_app/theme/color_palette.dart';
 import 'package:ceesam_app/widgets/feedback_response_consent_dialog.dart';
-import 'package:emojis/emojis.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:provider/provider.dart';
 
+import '../models/feedback_details.dart';
 import '../utils/validators/field_validator.dart';
 import '../widgets/widgets.dart';
 
@@ -27,6 +30,7 @@ class _FeedbackDetailsScreenState extends State<FeedbackDetailsScreen> {
 
   double _rating = 1;
   bool? _isChecked = false;
+  bool _isLoading = false;
 
   @override
   void initState() {
@@ -48,18 +52,44 @@ class _FeedbackDetailsScreenState extends State<FeedbackDetailsScreen> {
     formFieldIcon: Icons.feedback_outlined,
   );
 
-  // Future<void> _sendFeedback() async {
-  //   if (_formKey.currentState!.validate()) {
-  //     final feedback = FeedbackDetails(
-  //       description: ,
-  //         responseType: ,
-  //
-  //         // type: _feedbackDropdown.currentDropDownValue,
-  //         // description: _descriptionTextController.text
-  //         );
-  //     await NetworkHelper.submitFeedback(feedback);
-  //   }
-  // }
+  SnackBar _showFeedbackSnackBar(String message) {
+    return SnackBar(
+        backgroundColor: ColorPalette.primaryColor,
+        elevation: 15.0,
+        behavior: SnackBarBehavior.floating,
+        margin: const EdgeInsets.symmetric(horizontal: 20)
+            .add(const EdgeInsets.only(bottom: 20)),
+        content: Text(
+          message,
+          style: Theme.of(context)
+              .textTheme
+              .bodyMedium
+              ?.copyWith(color: Colors.white),
+        ));
+  }
+
+  Future<Map<String, dynamic>> _sendNamelessFeedback(
+      FeedbackDetails feedbackDetails) async {
+    if (_formKey.currentState!.validate()) {
+      try {
+        var jsonMap = await NetworkHelper.submitFeedback(feedbackDetails);
+        return <String, dynamic>{
+          'success': jsonMap['success'],
+          'message': jsonMap['message']
+        };
+      } catch (e) {
+        debugPrint("Unknown Exception In Screen: ${e.toString()}");
+        return <String, dynamic>{
+          'message':
+              "Error in uploading your feedback. Contact admin for support"
+        };
+      }
+    } else {
+      return <String, dynamic>{
+        'message': "Kindly check the format of your input data"
+      };
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -93,7 +123,7 @@ class _FeedbackDetailsScreenState extends State<FeedbackDetailsScreen> {
                         textController: _descriptionTextController,
                         formFieldText: 'Give a brief description',
                         formIcon: Icons.description_outlined,
-                        numberOfLines: 10,
+                        numberOfLines: 5,
                         fieldValidator: FieldValidator.textValidator,
                       ),
                       const SizedBox(height: 20),
@@ -114,30 +144,76 @@ class _FeedbackDetailsScreenState extends State<FeedbackDetailsScreen> {
                     ],
                   ),
                 ),
-                EUNCCUFilledButton(
-                  buttonText: "SUBMIT",
-                  buttonFunction: () async {
-                    if (_isChecked!) {
-                      showDialog(
-                          context: context,
-                          builder: (_) =>
-                              const FeedbackResponseConsentDialog());
-                    }
+                _isLoading
+                    ? SpinKitFadingCircle(
+                        color: ColorPalette.primaryColor,
+                        size: 70,
+                      )
+                    : EUNCCUFilledButton(
+                        buttonText: "SUBMIT",
+                        buttonFunction: () async {
+                          if (_isChecked!) {
+                            showDialog(
+                                context: context,
+                                builder: (_) => FeedbackResponseConsentDialog(
+                                      responseType:
+                                          _feedbackDropdown.dropdownValue,
+                                      description:
+                                          _descriptionTextController.text,
+                                      onClearTextFields: () => clearTextField(),
+                                    ));
+                          } else {
+                            setState(() => _isLoading = true);
 
-                    // await _sendFeedback();
-                    await Future.delayed(const Duration(
-                        seconds:
-                            5)); //todo: replace this with the endpoint call.
+                            try {
+                              var response = feedbackScreenProvider
+                                          .dropdownValue !=
+                                      'Complaint'
+                                  ? await _sendNamelessFeedback(
+                                      FeedbackDetails(
+                                          description:
+                                              _descriptionTextController.text,
+                                          responseType:
+                                              _feedbackDropdown.dropdownValue,
+                                          respondToFeedback: false),
+                                    )
+                                  : await _sendNamelessFeedback(
+                                      FeedbackDetails(
+                                        description:
+                                            _descriptionTextController.text,
+                                        responseType:
+                                            _feedbackDropdown.dropdownValue,
+                                        respondToFeedback: false,
+                                        urgencyLevel: _rating.toInt(),
+                                      ),
+                                    );
+                              if (response.containsKey('success') &&
+                                  response['success']) {
+                                setState(() => _isLoading = false);
 
-                    showDialog(
-                      context: context,
-                      builder: (_) => ReponseAlertDialog(
-                          message:
-                              'Your feedback has been submitted. Thank you.${Emojis.thumbsUp}'),
-                    );
-                    clearTextField();
-                  },
-                ),
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                    _showFeedbackSnackBar(response['message']));
+                              } else {
+                                setState(() => _isLoading = false);
+                                showDialog(
+                                  context: context,
+                                  builder: (_) => ReponseErrorDialog(
+                                      message: response['message']),
+                                );
+                              }
+                            } catch (e) {
+                              //todo: Log in Firebase Crashlytics
+                              showDialog(
+                                context: context,
+                                builder: (_) => ReponseErrorDialog(
+                                    message:
+                                        "Error in uploading your feedback. Try again later or contact admin for support."),
+                              );
+                            }
+                            clearTextField();
+                          }
+                        },
+                      ),
               ],
             ),
           ),
