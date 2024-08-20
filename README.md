@@ -12,4 +12,4 @@
 - Run `flutter run -v` to test your app.
 
 ## Point to note:
-- Setup and run [this](https://github.com/mwanagenzi/cesaam_feedback_web_app)] Laravel app project first before launching this Flutter app.
+- Setup and run [this](https://github.com/mwanagenzi/cesaam_feedback_web_app) Laravel app project first before launching this Flutter app.
