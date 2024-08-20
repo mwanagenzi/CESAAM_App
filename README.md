@@ -5,6 +5,7 @@
 ## Getting Started
 
 - Clone this project to your local device.
+- Checkout to `develop` branch.
 - Run `flutter pub get` to update all dependencies.
 - Start your PHP server and copy its url.
 - Open the file: `lib/utils/app_constants.dart` and change value of `BASE_URL`.
