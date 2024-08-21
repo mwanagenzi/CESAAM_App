@@ -2,7 +2,7 @@
     package="com.example.ceesam_app">
     <uses-permission android:name="android.permission.INTERNET"/>
    <application
-        android:label="ceesam_app"
+        android:label="CESAAM App"
         android:usesCleartextTraffic="true"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">

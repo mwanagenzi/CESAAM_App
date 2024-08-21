@@ -203,12 +203,9 @@ class _FeedbackDetailsScreenState extends State<FeedbackDetailsScreen> {
                               }
                             } catch (e) {
                               //todo: Log in Firebase Crashlytics
-                              showDialog(
-                                context: context,
-                                builder: (_) => ReponseErrorDialog(
-                                    message:
-                                        "Error in uploading your feedback. Try again later or contact admin for support."),
-                              );
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                  _showFeedbackSnackBar(
+                                      "Error in uploading your feedback. Try again later or contact admin for support."));
                             }
                             clearTextField();
                           }

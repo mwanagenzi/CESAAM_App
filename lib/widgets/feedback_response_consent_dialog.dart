@@ -136,7 +136,8 @@ class _FeedbackResponseConsentDialogState
                             responseType: widget.responseType,
                             respondToFeedback: true,
                             firstName: _firstNameTextController.text,
-                            surname: _surnameTextController.text),
+                            surname: _surnameTextController.text,
+                            email: _emailTextController.text),
                       );
 
                       if (response.containsKey('success') &&
