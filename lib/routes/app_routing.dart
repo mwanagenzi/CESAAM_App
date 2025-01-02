@@ -1,4 +1,4 @@
-import 'package:ceesam_app/provider/feedback_screen_provider.dart';
+import 'package:cesaam_feedback_app/provider/feedback_screen_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

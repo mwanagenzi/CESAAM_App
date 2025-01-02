@@ -1,4 +1,4 @@
-import 'package:ceesam_app/widgets/media_screen_tile.dart';
+import 'package:cesaam_feedback_app/widgets/media_screen_tile.dart';
 import 'package:flutter/material.dart';
 
 class MediaHandlesScreen extends StatelessWidget {

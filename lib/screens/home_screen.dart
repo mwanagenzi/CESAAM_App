@@ -1,4 +1,4 @@
-import 'package:ceesam_app/routes/app_routes.dart';
+import 'package:cesaam_feedback_app/routes/app_routes.dart';
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
 

@@ -1,4 +1,4 @@
-import 'package:ceesam_app/widgets/widgets.dart';
+import 'package:cesaam_feedback_app/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 

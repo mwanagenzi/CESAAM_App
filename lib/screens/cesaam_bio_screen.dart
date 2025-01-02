@@ -1,5 +1,5 @@
-import 'package:ceesam_app/screens/web_view_screen.dart';
-import 'package:ceesam_app/theme/color_palette.dart';
+import 'package:cesaam_feedback_app/screens/web_view_screen.dart';
+import 'package:cesaam_feedback_app/theme/color_palette.dart';
 import 'package:flutter/material.dart';
 
 class CESAAMBioScreen extends StatelessWidget {

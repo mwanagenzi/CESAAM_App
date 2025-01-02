@@ -1,8 +1,8 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:ceesam_app/models/feedback_details.dart';
-import 'package:ceesam_app/utils/constants.dart';
+import 'package:cesaam_feedback_app/models/feedback_details.dart';
+import 'package:cesaam_feedback_app/utils/constants.dart';
 import 'package:http/http.dart';
 
 class NetworkHelper {

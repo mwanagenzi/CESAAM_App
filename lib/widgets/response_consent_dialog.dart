@@ -1,4 +1,4 @@
-import 'package:ceesam_app/theme/color_palette.dart';
+import 'package:cesaam_feedback_app/theme/color_palette.dart';
 import 'package:flutter/material.dart';
 
 import '../screens/contact_details_screen.dart';

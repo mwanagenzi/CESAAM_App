@@ -1,7 +1,7 @@
-import 'package:ceesam_app/provider/feedback_screen_provider.dart';
-import 'package:ceesam_app/services/network_helper.dart';
-import 'package:ceesam_app/theme/color_palette.dart';
-import 'package:ceesam_app/widgets/feedback_response_consent_dialog.dart';
+import 'package:cesaam_feedback_app/provider/feedback_screen_provider.dart';
+import 'package:cesaam_feedback_app/services/network_helper.dart';
+import 'package:cesaam_feedback_app/theme/color_palette.dart';
+import 'package:cesaam_feedback_app/widgets/feedback_response_consent_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -46,7 +46,7 @@ class _FeedbackDetailsScreenState extends State<FeedbackDetailsScreen> {
     super.dispose();
   }
 
-  final _feedbackDropdown = EUNCCUDropdownFormField(
+  final _feedbackDropdown = CESAAMDropdownFormField(
     dropdownItems: feedbackItems,
     labelText: 'Feedback Type',
     formFieldIcon: Icons.feedback_outlined,

@@ -1,4 +1,4 @@
-import 'package:ceesam_app/widgets/widgets.dart';
+import 'package:cesaam_feedback_app/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -55,9 +55,10 @@ class _ContactDetailsScreenState extends State<ContactDetailsScreen> {
             const Text(
               'Fill in your contact details',
               style: TextStyle(
-              fontSize: 18,
-              // color: Colors.grey, //TODO: replace with hint text color
-            ),),
+                fontSize: 18,
+                // color: Colors.grey, //TODO: replace with hint text color
+              ),
+            ),
             const SizedBox(height: 20),
             Form(
               key: _formKey,

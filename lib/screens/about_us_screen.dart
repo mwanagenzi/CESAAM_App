@@ -1,5 +1,5 @@
-import 'package:ceesam_app/screens/cesaam_bio_screen.dart';
-import 'package:ceesam_app/screens/cesaam_media_handles.dart';
+import 'package:cesaam_feedback_app/screens/cesaam_bio_screen.dart';
+import 'package:cesaam_feedback_app/screens/cesaam_media_handles.dart';
 import 'package:flutter/material.dart';
 
 class AboutUsScreen extends StatefulWidget {

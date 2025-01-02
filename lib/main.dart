@@ -1,5 +1,5 @@
-import 'package:ceesam_app/routes/app_routing.dart';
-import 'package:ceesam_app/theme/cesaam_theme.dart';
+import 'package:cesaam_feedback_app/routes/app_routing.dart';
+import 'package:cesaam_feedback_app/theme/cesaam_theme.dart';
 import 'package:flutter/material.dart';
 
 void main() {
