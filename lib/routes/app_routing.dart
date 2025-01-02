@@ -27,8 +27,6 @@ Route<dynamic> generateAppRoutes(RouteSettings routeSettings) {
       return MaterialPageRoute(builder: (context) => const AboutUsScreen());
     case AppRoutes.contactUs:
       return MaterialPageRoute(builder: (context) => const ContactUsScreen());
-    case AppRoutes.location:
-      return MaterialPageRoute(builder: (context) => const LocationScreen());
     default:
       return MaterialPageRoute(builder: (context) => const WelcomeScreen());
   }

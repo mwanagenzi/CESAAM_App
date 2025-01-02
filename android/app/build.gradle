@@ -12,10 +12,11 @@ if (localPropertiesFile.exists()) {
     }
 }
 
-//def flutterRoot = localProperties.getProperty('flutter.sdk')
-//if (flutterRoot == null) {
-//    throw new GradleException("Flutter SDK not found. Define location with flutter.sdk in the local.properties file.")
-//}
+def keystoreProperties = new Properties()
+def keystorePropertiesFile = rootProject.file('key.properties')
+if (keystorePropertiesFile.exists()) {
+    keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+}
 
 def flutterVersionCode = localProperties.getProperty('flutter.versionCode')
 if (flutterVersionCode == null) {
@@ -59,11 +60,29 @@ android {
         versionName flutterVersionName
     }
 
+    signingConfigs {
+        release {
+            keyAlias keystoreProperties['keyAlias']
+            keyPassword keystoreProperties['keyPassword']
+            storeFile file(keystoreProperties['storeFile'])
+            storePassword keystoreProperties['storePassword']
+
+//            keyAlias 'key'
+//            keyPassword 'cesaamfeedbackpass'
+//            storeFile file('/home/mozes/dev/cesaam_app_signing/cesaam_feedback-key.jks')
+//            storePassword 'CESAAMFeedback2024'
+        }
+    }
+
     buildTypes {
         release {
+            ndk {
+                debugSymbolLevel 'FULL'  // Generate full debug symbols for native code
+            }
             // TODO: Add your own signing config for the release build.
             // Signing with the debug keys for now, so `flutter run --release` works.
-            signingConfig signingConfigs.debug
+//            signingConfig signingConfigs.debug
+            signingConfig signingConfigs.release
         }
     }
 }
