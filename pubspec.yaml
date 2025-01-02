@@ -1,4 +1,4 @@
-name: ceesam_app
+name: cesaam_feedback_app
 description: Mobile Application for service feedback collection for CESAAM.
 
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
@@ -26,6 +26,7 @@ dependencies:
   provider: ^6.0.5
   http: ^0.13.6
   logging: ^1.2.0
+  flutter_launcher_icons: ^0.13.1
 
 dev_dependencies:
   flutter_test:
@@ -44,3 +45,21 @@ flutter:
   assets:
     - assets/png_images/
     - assets/svg_images/
+
+flutter_launcher_icons:
+  android: "launcher_icon"
+  ios: false
+  image_path: "assets/png_images/CESAAM_LOGO_200.png"
+  min_sdk_android: 21 # android min sdk min:16, default 21
+#  web:
+#    generate: true
+#    image_path: "path/to/image.png"
+#    background_color: "#hexcode"
+#    theme_color: "#hexcode"
+#  windows:
+#    generate: true
+#    image_path: "path/to/image.png"
+#    icon_size: 48 # min:48, max:256, default: 48
+#  macos:
+#    generate: true
+#    image_path: "path/to/image.png"
